@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MizbanTV.Entities;
 
 namespace MizbanTV.Models
 {
@@ -21,7 +22,7 @@ namespace MizbanTV.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("MizbanTVConnection", throwIfV1Schema: false)
         {
         }
 
@@ -29,5 +30,8 @@ namespace MizbanTV.Models
         {
             return new ApplicationDbContext();
         }
+
+        public virtual DbSet<Video> Videos { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
     }
 }
