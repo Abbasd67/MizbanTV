@@ -1,0 +1,38 @@
+﻿@model MizbanTV.Models.AdminIndexViewModel
+@using Kendo.Mvc.UI
+@{
+    ViewBag.Title = "داشبورد ادمین";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    دسته بندی ها
+</h2>
+
+
+<p>
+    @Html.ActionLink("ساختن جدید", "Create", "Categories")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Categories[0].Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Categories)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a href="/Categories/Edit/@item.ID">ویرایش</a> |
+                <a href="/Categories/Details/@item.ID">نمایش</a> |
+                <a href="/Categories/Delete/@item.ID">حذف</a>
+            </td>
+        </tr>
+    }
+
+</table>
