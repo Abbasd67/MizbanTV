@@ -1,5 +1,4 @@
-﻿@model MizbanTV.Models.AdminIndexViewModel
-@using Kendo.Mvc.UI
+﻿@using Kendo.Mvc.UI
 @{
     ViewBag.Title = "داشبورد ادمین";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,30 +8,37 @@
     دسته بندی ها
 </h2>
 
-
-<p>
-    @Html.ActionLink("ساختن جدید", "Create", "Categories")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Categories[0].Name)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.Categories)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a href="/Categories/Edit/@item.ID">ویرایش</a> |
-                <a href="/Categories/Details/@item.ID">نمایش</a> |
-                <a href="/Categories/Delete/@item.ID">حذف</a>
-            </td>
-        </tr>
-    }
-
-</table>
+@(Html.Kendo().Grid<MizbanTV.Entities.Category>()
+        .Name("Categories")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.Name);
+            columns.Command(command => command.Destroy()).Width(150);
+        })
+        .ToolBar(toolbar =>
+        {
+            toolbar.Create();
+            toolbar.Save();
+        })
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Pageable()
+        .Navigatable()
+        .Sortable()
+        .Scrollable()
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Batch(true)
+            .PageSize(20)
+            .ServerOperation(false)
+            .Events(events => events.Error("error_handler"))
+            .Model(model =>
+            {
+                model.Id(p => p.ID);
+                model.Field(id => id.ID).DefaultValue(Guid.NewGuid());
+            })
+            .Create("CategoryCreate", "Admin")
+            .Read("CategoryRead", "Admin")
+            .Update("CategoryUpdate", "Admin")
+            .Destroy("CategoryDestroy", "Admin")
+        )
+)

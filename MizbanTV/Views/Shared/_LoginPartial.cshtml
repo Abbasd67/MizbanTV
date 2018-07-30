@@ -1,28 +1,29 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
-
-<ul class="nav navbar-nav navbar-right">
-    <li class="nav-item">
-        <a class="nav-link" href="/Manage/Index">سلام @User.Identity.GetUserName()!</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="avascript:document.getElementById('logoutForm').submit()">Log off</a>
-    </li>
-</ul>
-    }
+    <ul class="nav navbar-nav navbar-right">
+        @if (User.IsInRole("Administrator"))
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="/Admin/Index">پنل مدیریت</a>
+            </li>
+        }
+        <li class="nav-item">
+            <a class="nav-link" href="/Manage/Index">سلام @User.Identity.GetUserName()!</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Account/LogOff">خروج</a>
+        </li>
+    </ul>
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
-            <a class="nav-link" href="/Account/Register">Register</a>
+            <a class="nav-link" href="/Account/Register">ثبت نام</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/Account/Login">Log in</a>
+            <a class="nav-link" href="/Account/Login">ورود</a>
         </li>
     </ul>
 }

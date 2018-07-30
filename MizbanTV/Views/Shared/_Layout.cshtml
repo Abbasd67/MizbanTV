@@ -7,17 +7,33 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-	<!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
-	@Scripts.Render("~/bundles/jquery")
-	<link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
-	<link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
-	<script src="https://kendo.cdn.telerik.com/2018.2.620/js/jquery.min.js"></script>
-	<script src="https://kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
-	<script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
-	<script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.aspnetmvc.min.js"></script>
-	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+    @Scripts.Render("~/bundles/jquery")
+    <link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.aspnetmvc.min.js"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
 </head>
 <body class="k-rtl">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
