@@ -30,6 +30,15 @@ namespace MizbanTV.Models
         {
             return new ApplicationDbContext();
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Category>()
+                .HasMany(e => e.Videos)
+                .WithRequired(e => e.Category)
+                .HasForeignKey(e => e.CategoryID)
+                .WillCascadeOnDelete();
+        }
 
         public virtual DbSet<Video> Videos { get; set; }
         public virtual DbSet<Category> Categories { get; set; }

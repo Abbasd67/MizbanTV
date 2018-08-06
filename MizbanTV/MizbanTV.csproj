@@ -47,11 +47,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Kendo.Mvc">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\Kendo.Mvc.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\Kendo.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Kendo.Mvc.Export">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\export\binaries\net40\Kendo.Mvc.Export.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\export\binaries\net40\Kendo.Mvc.Export.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -106,47 +106,47 @@
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Documents.SpreadsheetStreaming">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\spreadsheet\binaries\net40\Telerik.Documents.SpreadsheetStreaming.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Documents.SpreadsheetStreaming.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Web.Spreadsheet">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\spreadsheet\binaries\net40\Telerik.Web.Spreadsheet.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Web.Spreadsheet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Documents.Core">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\spreadsheet\binaries\net40\Telerik.Windows.Documents.Core.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Windows.Documents.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Documents.Fixed">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\spreadsheet\binaries\net40\Telerik.Windows.Documents.Fixed.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Windows.Documents.Fixed.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Documents.Flow">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\spreadsheet\binaries\net40\Telerik.Windows.Documents.Flow.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Windows.Documents.Flow.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Documents.Flow.FormatProviders.Pdf">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\spreadsheet\binaries\net40\Telerik.Windows.Documents.Flow.FormatProviders.Pdf.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Windows.Documents.Flow.FormatProviders.Pdf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Documents.Spreadsheet">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\spreadsheet\binaries\net40\Telerik.Windows.Documents.Spreadsheet.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Windows.Documents.Spreadsheet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\spreadsheet\binaries\net40\Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\spreadsheet\binaries\net40\Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Zip">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\spreadsheet\binaries\net40\Telerik.Windows.Zip.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Windows.Zip.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Zip.Extensions">
-      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545.Trial\spreadsheet\binaries\net40\Telerik.Windows.Zip.Extensions.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Windows.Zip.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
@@ -252,10 +252,25 @@
     <Compile Include="Migrations\201807280821224_VideoAndCategoryAdded.Designer.cs">
       <DependentUpon>201807280821224_VideoAndCategoryAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807301143417_VideoDescriptionAdded.cs" />
+    <Compile Include="Migrations\201807301143417_VideoDescriptionAdded.Designer.cs">
+      <DependentUpon>201807301143417_VideoDescriptionAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301515525_DontKnow.cs" />
+    <Compile Include="Migrations\201807301515525_DontKnow.Designer.cs">
+      <DependentUpon>201807301515525_DontKnow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807311335366_ChangeVideoFreignKey.cs" />
+    <Compile Include="Migrations\201807311335366_ChangeVideoFreignKey.Designer.cs">
+      <DependentUpon>201807311335366_ChangeVideoFreignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808010751131_DateAddedToVideo.cs" />
+    <Compile Include="Migrations\201808010751131_DateAddedToVideo.Designer.cs">
+      <DependentUpon>201808010751131_DateAddedToVideo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
-    <Compile Include="Models\CategoriesController.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -265,7 +280,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\Helper.cs" />
+    <Compile Include="Services\VideoService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="Views\VideosController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -350,6 +368,7 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\Admin\CreateVideo.cshtml" />
     <Content Include="Views\Videos\Create.cshtml" />
     <Content Include="Views\Videos\Delete.cshtml" />
     <Content Include="Views\Videos\Details.cshtml" />
@@ -357,7 +376,9 @@
     <Content Include="Views\Videos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Temp\" />
+    <Folder Include="App_Data\Thumb\" />
+    <Folder Include="App_Data\Video\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -377,6 +398,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807280821224_VideoAndCategoryAdded.resx">
       <DependentUpon>201807280821224_VideoAndCategoryAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301143417_VideoDescriptionAdded.resx">
+      <DependentUpon>201807301143417_VideoDescriptionAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301515525_DontKnow.resx">
+      <DependentUpon>201807301515525_DontKnow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807311335366_ChangeVideoFreignKey.resx">
+      <DependentUpon>201807311335366_ChangeVideoFreignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808010751131_DateAddedToVideo.resx">
+      <DependentUpon>201808010751131_DateAddedToVideo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -12,9 +12,9 @@ namespace MizbanTV.Services
         ApplicationDbContext Context { get; set; }
         public CategoryService(ApplicationDbContext context) => Context = context;
 
-        public IList<Category> GetAll() => Context.Categories.ToList();
+        public List<Category> GetAll() => Context.Categories.OrderByDescending(c=>c.Name).ToList();
 
-        public IEnumerable<Category> Read() => GetAll();
+        public List<Category> Read() => GetAll();
 
         public void Insert(Category category)
         {

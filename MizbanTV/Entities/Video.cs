@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MizbanTV.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,12 +13,30 @@ namespace MizbanTV.Entities
         [Key]
         public Guid ID { get; set; }
 
-        public string Name { get; set; }
-        
-        public int Size { get; set; }
+        [Display(Name = "عنوان")]
+        public string Title { get; set; }
 
-        public string Path { get; set; }
+        [Display(Name = "توضیحات")]
+        public string Description { get; set; }
+
+        [Display(Name = "اندازه فایل")]
+        public long Size { get; set; }
+
+        [Display(Name = "نام فایل")]
+        public string FileName { get; set; }
+
+        [Display(Name = "دسته بندی")]
+        public Guid CategoryID { get; set; }
 
         public virtual Category Category { get; set; }
+
+        [Display(Name = "تاریخ ایجاد")]
+        public DateTime CreateDate { get; set; }
+
+        [Display(Name = "تاریخ آخرین تغییر")]
+        public DateTime LastModifiedDate { get; set; }
+
+        [NotMapped]
+        public string FileSizeString { get => Helper.ConvertFileSizeToString(Size);  }
     }
 }

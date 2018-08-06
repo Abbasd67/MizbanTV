@@ -8,112 +8,112 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MizbanTV.Entities;
+using MizbanTV.Models;
 
-namespace MizbanTV.Models
+namespace MizbanTV.Views.Admin
 {
-    [Authorize(Roles = "Administrator")]
-    public class CategoriesController : Controller
+    public class VideosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Categories
-        public ActionResult Index()
+        // GET: Videos
+        public async Task<ActionResult> Index()
         {
-            return RedirectToAction("index", "Admin");
+            return View(await db.Videos.ToListAsync());
         }
 
-        // GET: Categories/Details/5
+        // GET: Videos/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
-            if (category == null)
+            Video video = await db.Videos.FindAsync(id);
+            if (video == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(video);
         }
 
-        // GET: Categories/Create
+        // GET: Videos/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Videos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Name")] Category category)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Title,Description,Size,FileName")] Video video)
         {
             if (ModelState.IsValid)
             {
-                category.ID = Guid.NewGuid();
-                db.Categories.Add(category);
+                video.ID = Guid.NewGuid();
+                db.Videos.Add(video);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(video);
         }
 
-        // GET: Categories/Edit/5
+        // GET: Videos/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
-            if (category == null)
+            Video video = await db.Videos.FindAsync(id);
+            if (video == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(video);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Videos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Name")] Category category)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Title,Description,Size,FileName")] Video video)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                db.Entry(video).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            return View(video);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Videos/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
-            if (category == null)
+            Video video = await db.Videos.FindAsync(id);
+            if (video == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(video);
         }
 
-        // POST: Categories/Delete/5
+        // POST: Videos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            Category category = await db.Categories.FindAsync(id);
-            db.Categories.Remove(category);
+            Video video = await db.Videos.FindAsync(id);
+            db.Videos.Remove(video);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
