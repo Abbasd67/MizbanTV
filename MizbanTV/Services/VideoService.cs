@@ -31,7 +31,7 @@ namespace MizbanTV.Services
                     Description = video.Description,
                     CategoryName = video.Category.Name,
                     FileName = video.FileName,
-                    Size = Helper.ConvertFileSizeToString(video.Size)
+                    Size = video.FileSizeString
                 });
             }
             return model;

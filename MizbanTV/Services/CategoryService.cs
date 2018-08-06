@@ -12,7 +12,7 @@ namespace MizbanTV.Services
         ApplicationDbContext Context { get; set; }
         public CategoryService(ApplicationDbContext context) => Context = context;
 
-        public List<Category> GetAll() => Context.Categories.OrderByDescending(c=>c.Name).ToList();
+        public List<Category> GetAll() => Context.Categories.OrderBy(c=>c.Order).ToList();
 
         public List<Category> Read() => GetAll();
 
@@ -28,6 +28,7 @@ namespace MizbanTV.Services
             if (target != null)
             {
                 target.Name = category.Name;
+                target.Order = category.Order;
                 Context.SaveChanges();
             }
         }

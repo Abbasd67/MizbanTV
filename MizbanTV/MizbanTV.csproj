@@ -268,6 +268,10 @@
     <Compile Include="Migrations\201808010751131_DateAddedToVideo.Designer.cs">
       <DependentUpon>201808010751131_DateAddedToVideo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808061911460_AddOrderForCategory.cs" />
+    <Compile Include="Migrations\201808061911460_AddOrderForCategory.Designer.cs">
+      <DependentUpon>201808061911460_AddOrderForCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -283,7 +287,6 @@
     <Compile Include="Services\Helper.cs" />
     <Compile Include="Services\VideoService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="Views\VideosController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -369,11 +372,7 @@
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Admin\CreateVideo.cshtml" />
-    <Content Include="Views\Videos\Create.cshtml" />
-    <Content Include="Views\Videos\Delete.cshtml" />
-    <Content Include="Views\Videos\Details.cshtml" />
-    <Content Include="Views\Videos\Edit.cshtml" />
-    <Content Include="Views\Videos\Index.cshtml" />
+    <Content Include="Views\Admin\EditVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Temp\" />
@@ -410,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808010751131_DateAddedToVideo.resx">
       <DependentUpon>201808010751131_DateAddedToVideo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808061911460_AddOrderForCategory.resx">
+      <DependentUpon>201808061911460_AddOrderForCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

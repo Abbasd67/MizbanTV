@@ -1,9 +1,9 @@
 ﻿@model MizbanTV.Models.SendCodeViewModel
 @{
-    ViewBag.Title = "Send";
+    ViewBag._Title = "Send";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag._Title.</h2>
 
 @using (Html.BeginForm("SendCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     @Html.AntiForgeryToken()

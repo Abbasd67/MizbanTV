@@ -93,7 +93,7 @@ namespace MizbanTV.Controllers
         public ActionResult VideoRead([DataSourceRequest] DataSourceRequest request)
         {
 
-            var data = videoService.Read().ToDataSourceResult(request);
+            var data = videoService.ReadToAdminIndexModel().ToDataSourceResult(request);
             var list = JsonConvert.SerializeObject(data, Formatting.None,
                     new JsonSerializerSettings()
                     {
@@ -109,6 +109,7 @@ namespace MizbanTV.Controllers
             {
                 foreach (var product in products)
                 {
+                    System.IO.File.Delete(Path.Combine(Helper.GetVideoPath(), product.FileName));
                     videoService.Delete(product);
                 }
             }
@@ -120,16 +121,7 @@ namespace MizbanTV.Controllers
         {
             var model = new AdminCreateVideoViewModel();
             model.ID = Guid.NewGuid();
-            var categories = categoryService.GetAll();
-            model.Categories = new List<CategoryModel>();
-            foreach (var category in categories)
-            {
-                model.Categories.Add(new CategoryModel
-                {
-                    Value = category.ID,
-                    Text = category.Name
-                });
-            }
+            ViewBag.Categories = categoryService.GetAll();
             return View(model);
         }
         [HttpPost]
@@ -143,6 +135,7 @@ namespace MizbanTV.Controllers
                 if (!System.IO.File.Exists(filePath))
                 {
                     ModelState.AddModelError("", "File Not Found!");
+                    ViewBag.Categories = categoryService.GetAll();
                     return View(model);
                 }
                 var fileInfo = new FileInfo(filePath);
@@ -159,9 +152,10 @@ namespace MizbanTV.Controllers
                 });
                 var newPath = Path.Combine(Helper.GetVideoPath(), model.FileName);
                 System.IO.File.Copy(filePath, newPath, true);
-                //db.Entry(video).State = EntityState.Modified;
+                System.IO.File.Delete(filePath);
                 return RedirectToAction("Index");
             }
+            ViewBag.Categories = categoryService.GetAll();
             return View(model);
         }
 
@@ -184,6 +178,63 @@ namespace MizbanTV.Controllers
         }
 
 
+        public ActionResult EditVideo(Guid id)
+        {
+            var video = videoService.One(v => v.ID == id);
+            if (video == null)
+                RedirectToAction("index");
+            var model = new AdminEditVideoViewModel() {
+                ID = video.ID,
+                Title = video.Title,
+                Description = video.Description,
+                FileName = video.FileName,
+                CategoryID = video.CategoryID,
+                Extension = Path.GetExtension(video.FileName),
+                IsNewFileUploaded = false,
+                Size = video.Size,
+            };
+            ViewBag.Categories = categoryService.GetAll();
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditVideo([Bind(Include = "ID,Title,Description,Size,FileName,CategoryID,IsNewFileUploaded,Categories,Extension")] AdminEditVideoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var video = videoService.One(v => v.ID == model.ID);
+                if (video == null)
+                {
+                    ModelState.AddModelError("", "Video Not Found");
+                    return View(model);
+                }
+                if (model.IsNewFileUploaded)
+                {
+                    var fileExtension = Path.GetExtension(model.FileName);
+                    var filePath = Path.Combine(Helper.GetTempPath(), model.ID.ToString() + "." + fileExtension);
+                    if (!System.IO.File.Exists(filePath))
+                    {
+                        ModelState.AddModelError("", "File Not Found!");
+                        ViewBag.Categories = categoryService.GetAll();
+                        return View(model);
+                    }
+                    var fileInfo = new FileInfo(filePath);
+                    System.IO.File.Delete(Path.Combine(Helper.GetVideoPath(), video.FileName));
+                    System.IO.File.Copy(filePath, Path.Combine(Helper.GetVideoPath(), model.FileName), true);
+                    video.Size = fileInfo.Length;
+                    System.IO.File.Delete(filePath);
+                    video.FileName = model.FileName;
+                }
+                video.LastModifiedDate = DateTime.Now;
+                video.Title = model.Title;
+                video.Description = model.Description;
+                video.CategoryID = model.CategoryID;
+                videoService.Update(video);
+                return RedirectToAction("Index");
+            }
+            ViewBag.Categories = categoryService.GetAll();
+            return View(model);
+        }
 
     }
 

@@ -11,8 +11,13 @@ namespace MizbanTV.Entities
         [Key]
         public Guid ID { get; set; }
 
+        [CustomRequired]
         [Display(Name = "نام دسته بندی")]
         public string Name { get; set; }
+
+        [CustomRequired]
+        [Display(Name = "شماره ترتیب")]
+        public int Order { get; set; }
 
         public virtual List<Video> Videos { get; set; }
     }
