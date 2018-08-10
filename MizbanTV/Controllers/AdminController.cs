@@ -128,18 +128,10 @@ namespace MizbanTV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateVideo([Bind(Include = "ID,Title,Description,FileName,CategoryID")] AdminCreateVideoViewModel model)
         {
+            ViewBag.Categories = categoryService.GetAll();
             if (ModelState.IsValid)
             {
-                var fileExtension = Path.GetExtension(model.FileName);
-                var filePath = Path.Combine(Helper.GetTempPath(), model.ID.ToString() + "." + fileExtension);
-                if (!System.IO.File.Exists(filePath))
-                {
-                    ModelState.AddModelError("", "File Not Found!");
-                    ViewBag.Categories = categoryService.GetAll();
-                    return View(model);
-                }
-                var fileInfo = new FileInfo(filePath);
-                videoService.Insert(new Video()
+                var video = new Video()
                 {
                     ID = model.ID,
                     CategoryID = model.CategoryID,
@@ -147,15 +139,12 @@ namespace MizbanTV.Controllers
                     LastModifiedDate = DateTime.Now,
                     Title = model.Title,
                     Description = model.Description,
-                    FileName = model.FileName,
-                    Size = fileInfo.Length
-                });
-                var newPath = Path.Combine(Helper.GetVideoPath(), model.FileName);
-                System.IO.File.Copy(filePath, newPath, true);
-                System.IO.File.Delete(filePath);
+                    FileName = model.FileName
+                };
+                video = Helper.SaveVideo(video, model.FileName);
+                videoService.Insert(video);
                 return RedirectToAction("Index");
             }
-            ViewBag.Categories = categoryService.GetAll();
             return View(model);
         }
 
@@ -200,6 +189,7 @@ namespace MizbanTV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditVideo([Bind(Include = "ID,Title,Description,Size,FileName,CategoryID,IsNewFileUploaded,Categories,Extension")] AdminEditVideoViewModel model)
         {
+            ViewBag.Categories = categoryService.GetAll();
             if (ModelState.IsValid)
             {
                 var video = videoService.One(v => v.ID == model.ID);
@@ -210,20 +200,7 @@ namespace MizbanTV.Controllers
                 }
                 if (model.IsNewFileUploaded)
                 {
-                    var fileExtension = Path.GetExtension(model.FileName);
-                    var filePath = Path.Combine(Helper.GetTempPath(), model.ID.ToString() + "." + fileExtension);
-                    if (!System.IO.File.Exists(filePath))
-                    {
-                        ModelState.AddModelError("", "File Not Found!");
-                        ViewBag.Categories = categoryService.GetAll();
-                        return View(model);
-                    }
-                    var fileInfo = new FileInfo(filePath);
-                    System.IO.File.Delete(Path.Combine(Helper.GetVideoPath(), video.FileName));
-                    System.IO.File.Copy(filePath, Path.Combine(Helper.GetVideoPath(), model.FileName), true);
-                    video.Size = fileInfo.Length;
-                    System.IO.File.Delete(filePath);
-                    video.FileName = model.FileName;
+                    video = Helper.SaveVideo(video, model.FileName);
                 }
                 video.LastModifiedDate = DateTime.Now;
                 video.Title = model.Title;
@@ -232,7 +209,6 @@ namespace MizbanTV.Controllers
                 videoService.Update(video);
                 return RedirectToAction("Index");
             }
-            ViewBag.Categories = categoryService.GetAll();
             return View(model);
         }
 

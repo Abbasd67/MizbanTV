@@ -24,6 +24,7 @@ namespace MizbanTV.Entities
 
         [Display(Name = "نام فایل")]
         public string FileName { get; set; }
+        public string ThumbName { get; set; }
 
         [Display(Name = "دسته بندی")]
         public Guid CategoryID { get; set; }
