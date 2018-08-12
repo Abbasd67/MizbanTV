@@ -62,9 +62,10 @@
                 columns.Bound(p => p.FileName);
                 columns.Command(command =>
                 {
+                    command.Custom("View").Click("viewVideo");
                     command.Custom("Edit").Click("editVideo");
                     command.Destroy();
-                }).Width(250);
+                }).Width(300);
             })
             .Pageable()
             .Navigatable()
@@ -89,6 +90,9 @@
     <script>
         function editVideo(e) {
             window.location.href = '/Admin/EditVideo/' + this.dataItem($(e.currentTarget).closest("tr")).ID;
+        }
+        function viewVideo(e) {
+            window.location.href = '/Videos/ViewVideo/' + this.dataItem($(e.currentTarget).closest("tr")).ID;
         }
     </script>
 }

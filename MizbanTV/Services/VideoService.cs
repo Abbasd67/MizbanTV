@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.IO;
 
 namespace MizbanTV.Services
 {
@@ -57,17 +58,21 @@ namespace MizbanTV.Services
             }
         }
 
-        public void Delete(Video video)
+
+        public void Delete (Guid id)
         {
-            var target = One(e => e.ID == video.ID);
+            var target = One(e => e.ID == id);
             if (target != null)
             {
+                File.Delete(Path.Combine(Helper.GetVideoPath(), target.FileName));
+                File.Delete(Path.Combine(Helper.GetThumbPath(), target.ThumbName));
                 Context.Videos.Remove(target);
                 Context.SaveChanges();
             }
         }
+        public void Delete(Video video) => Delete(video.ID);
 
-        public void Delete(AdminIndexVideoViewModel model) => Delete(new Video { ID = model.ID });
+        public void Delete(AdminIndexVideoViewModel model) => Delete(model.ID);
 
         public Video One(Func<Video, bool> predicate) => GetAll().FirstOrDefault(predicate);
         public void Dispose() => Context.Dispose();

@@ -1,0 +1,106 @@
+﻿@model MizbanTV.Models.ViewVideoViewModels
+
+@{
+    ViewBag._Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row" style="text-align:center;">
+    <div class="col-md-12">
+            <h2 >MIZBAN TV</h2>
+    </div>
+    <div class="col-md-12">
+            <img src="~/Content/Images/Advertising-H.gif" />
+    </div>
+    <div class="col-md-9">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <video controls playsinline poster="@Url.Content(Model.ThumbName)" id="player">
+                            <source src="@Url.Content(Model.FileName)" type="video/mp4">
+                            <a href="@Url.Content(Model.FileName)" download>Download</a>
+                        </video>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">@Model.Title</div>
+                            <div class="card-body" style="text-align:right;">
+                                <p class="card-text">
+                                    <div class="row">
+                                        <div class="col-md-5 control-label">
+                                            لینک دانلود
+                                        </div>
+                                        <div class="col-md-7">
+                                            <a class="btn btn-success" href="@Url.Content(Model.FileName)" download>Download</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.Title, new { @class = "col-md-5 control-label" })
+                                        <div class="col-md-7">
+                                            @Html.DisplayFor(model => model.Title)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.Description, new { @class = "col-md-5 control-label" })
+                                        <div class="col-md-7">
+                                            @Html.DisplayFor(model => model.Description)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.Size, new { @class = "col-md-5 control-label" })
+                                        <div class="col-md-7">
+                                            @Html.DisplayFor(model => model.Size)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.CategoryName, new { @class = "col-md-5 control-label" })
+                                        <div class="col-md-7">
+                                            @Html.DisplayFor(model => model.CategoryName)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.CreationDate, new { @class = "col-md-5 control-label" })
+                                        <div class="col-md-7">
+                                            @Html.DisplayFor(model => model.CreationDate)
+                                        </div>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3>ویدیو های مرتبط</h3>
+                </div>
+                <div class="row">
+                    @{
+                        foreach (var thumb in Model.ThumbNails)
+                        {
+                            Html.RenderPartial("_ViewThumbPartial", thumb);
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-ms-3">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="~/Content/Images/Advertising-V.png" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <img src="~/Content/Images/Advertising-V.png" />
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>const player = new Plyr('#player');</script>
+}

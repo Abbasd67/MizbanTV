@@ -152,6 +152,21 @@
       <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\spreadsheet\binaries\net40\Telerik.Windows.Zip.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Unicorn.Data">
+      <HintPath>..\..\Safarkja\lib\Unicorn.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Unicorn.Data.EF">
+      <HintPath>..\..\Safarkja\lib\Unicorn.Data.EF.dll</HintPath>
+    </Reference>
+    <Reference Include="Unicorn.Mvc">
+      <HintPath>..\..\Safarkja\lib\Unicorn.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Unicorn.Mvc.KendoHelpers">
+      <HintPath>..\..\Safarkja\lib\Unicorn.Mvc.KendoHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Unicorn.Web">
+      <HintPath>..\..\Safarkja\lib\Unicorn.Web.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -242,6 +257,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Video.cs" />
     <Compile Include="Global.asax.cs">
@@ -282,7 +298,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
-    <Compile Include="Models\HomeViewModels.cs" />
+    <Compile Include="Models\VideoViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -295,11 +311,15 @@
     <Compile Include="Services\Helper.cs" />
     <Compile Include="Services\VideoService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Views\VideosController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Advertising-V.png" />
+    <Content Include="Content\Images\Advertising-H.gif" />
+    <Content Include="Content\plyr.css" />
+    <Content Include="Content\Thumb\Piper.2016.BDRip.Ganool.IranFilm.jpg" />
+    <Content Include="Content\Video\Piper.2016.BDRip.Ganool.IranFilm.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -383,11 +403,14 @@
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Admin\CreateVideo.cshtml" />
     <Content Include="Views\Admin\EditVideo.cshtml" />
+    <Content Include="Views\Videos\ViewVideo.cshtml" />
+    <Content Include="Views\Shared\_ViewThumbPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Temp\" />
     <Folder Include="App_Data\Thumb\" />
     <Folder Include="App_Data\Video\" />
+    <Folder Include="Content\Temp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

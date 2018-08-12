@@ -1,0 +1,14 @@
+﻿@model MizbanTV.Models.ThumbnailViewModel
+
+
+<div class="col-md-4">
+    <div class="view view@(Model.Random)">
+        <img src="@Url.Content(Model.TumbName)" width="300" height="200" />
+        <div class="mask"></div>
+        <div class="content">
+            <h2>@Model.Title</h2>
+            <p>@Model.Description</p>
+            <a href="/Videos/ViewVideo/@Model.ID" class="info">نمایش</a>
+        </div>
+    </div>
+</div>

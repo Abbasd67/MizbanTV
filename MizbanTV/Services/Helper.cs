@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using Unicorn;
 
 namespace MizbanTV.Services
 {
@@ -14,6 +15,9 @@ namespace MizbanTV.Services
         private const Decimal OneMegaByte = OneKiloByte * 1024M;
         private const Decimal OneGigaByte = OneMegaByte * 1024M;
         private const string ImageExtention = ".jpg";
+        public const string LocalTempPath = "~/Content/Temp";
+        public const string LocalVideoPath = "~/Content/Video";
+        public const string LocalThumbPath = "~/Content/Thumb";
         public static string ConvertFileSizeToString(long fileSize)
         {
             decimal size = fileSize;
@@ -50,11 +54,11 @@ namespace MizbanTV.Services
             }
         }
 
-        public static string GetTempPath() => HttpContext.Current.Server.MapPath("~/App_Data/Temp");
+        public static string GetTempPath() => HttpContext.Current.Server.MapPath(LocalTempPath);
 
-        public static string GetVideoPath() => HttpContext.Current.Server.MapPath("~/App_Data/Video");
+        public static string GetVideoPath() => HttpContext.Current.Server.MapPath(LocalVideoPath);
 
-        public static string GetThumbPath() => HttpContext.Current.Server.MapPath("~/App_Data/Thumb");
+        public static string GetThumbPath() => HttpContext.Current.Server.MapPath(LocalThumbPath);
 
         public static Video SaveVideo(Video video, string fileName)
         {
@@ -63,7 +67,7 @@ namespace MizbanTV.Services
             string currentVideoPath = Path.Combine(GetVideoPath(), video.FileName);
             string tempPath = Path.Combine(GetTempPath(), video.ID.ToString() + "." + fileExtension);
             string newVideoPath = Path.Combine(GetVideoPath(), fileName);
-            string currentThumbPath = Path.Combine(GetThumbPath(), video.ThumbName);
+            string currentThumbPath = Path.Combine(GetThumbPath(), fileNameWithoutExtention + ImageExtention);
             string newThumbPath = Path.Combine(GetThumbPath(), fileNameWithoutExtention + ImageExtention);
             if (File.Exists(currentVideoPath))
                 File.Delete(currentVideoPath);
@@ -79,5 +83,8 @@ namespace MizbanTV.Services
             video.Size = new FileInfo(newVideoPath).Length;
             return video;
         }
+
+        public static PersianDateTime ConvertMiladiToShamsi(DateTime dateTime) => new PersianDateTime(dateTime);
+
     }
 }

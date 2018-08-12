@@ -18,14 +18,14 @@ namespace MizbanTV.Controllers
     public class AdminController : Controller
     {
         private ApplicationDbContext db;
-        private CategoryService categoryService;
-        private VideoService videoService;
+        private CategoryService CategoryService { get; set; }
+        private VideoService VideoService { get; set; }
 
         public AdminController()
         {
             db = new ApplicationDbContext();
-            categoryService = new CategoryService(db);
-            videoService = new VideoService(db);
+            CategoryService = new CategoryService(db);
+            VideoService = new VideoService(db);
         }
         // GET: Admin
         public ActionResult Index()
@@ -35,7 +35,7 @@ namespace MizbanTV.Controllers
         [Route("CategoryRead")]
         public ActionResult CategoryRead([DataSourceRequest] DataSourceRequest request)
         {
-            var data = categoryService.Read().ToDataSourceResult(request);
+            var data = CategoryService.Read().ToDataSourceResult(request);
             var list = JsonConvert.SerializeObject(data, Formatting.None,
                     new JsonSerializerSettings()
                     {
@@ -54,7 +54,7 @@ namespace MizbanTV.Controllers
                 foreach (var product in products)
                 {
                     product.ID = Guid.NewGuid();
-                    categoryService.Insert(product);
+                    CategoryService.Insert(product);
                     results.Add(product);
                 }
             }
@@ -69,7 +69,7 @@ namespace MizbanTV.Controllers
             {
                 foreach (var product in products)
                 {
-                    categoryService.Update(product);
+                    CategoryService.Update(product);
                 }
             }
 
@@ -83,7 +83,7 @@ namespace MizbanTV.Controllers
             {
                 foreach (var product in products)
                 {
-                    categoryService.Delete(product);
+                    CategoryService.Delete(product);
                 }
             }
 
@@ -93,7 +93,7 @@ namespace MizbanTV.Controllers
         public ActionResult VideoRead([DataSourceRequest] DataSourceRequest request)
         {
 
-            var data = videoService.ReadToAdminIndexModel().ToDataSourceResult(request);
+            var data = VideoService.ReadToAdminIndexModel().ToDataSourceResult(request);
             var list = JsonConvert.SerializeObject(data, Formatting.None,
                     new JsonSerializerSettings()
                     {
@@ -109,8 +109,7 @@ namespace MizbanTV.Controllers
             {
                 foreach (var product in products)
                 {
-                    System.IO.File.Delete(Path.Combine(Helper.GetVideoPath(), product.FileName));
-                    videoService.Delete(product);
+                    VideoService.Delete(product);
                 }
             }
 
@@ -121,14 +120,14 @@ namespace MizbanTV.Controllers
         {
             var model = new AdminCreateVideoViewModel();
             model.ID = Guid.NewGuid();
-            ViewBag.Categories = categoryService.GetAll();
+            ViewBag.Categories = CategoryService.GetAll();
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateVideo([Bind(Include = "ID,Title,Description,FileName,CategoryID")] AdminCreateVideoViewModel model)
         {
-            ViewBag.Categories = categoryService.GetAll();
+            ViewBag.Categories = CategoryService.GetAll();
             if (ModelState.IsValid)
             {
                 var video = new Video()
@@ -142,7 +141,7 @@ namespace MizbanTV.Controllers
                     FileName = model.FileName
                 };
                 video = Helper.SaveVideo(video, model.FileName);
-                videoService.Insert(video);
+                VideoService.Insert(video);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -169,10 +168,11 @@ namespace MizbanTV.Controllers
 
         public ActionResult EditVideo(Guid id)
         {
-            var video = videoService.One(v => v.ID == id);
+            var video = VideoService.One(v => v.ID == id);
             if (video == null)
                 RedirectToAction("index");
-            var model = new AdminEditVideoViewModel() {
+            var model = new AdminEditVideoViewModel()
+            {
                 ID = video.ID,
                 Title = video.Title,
                 Description = video.Description,
@@ -182,17 +182,17 @@ namespace MizbanTV.Controllers
                 IsNewFileUploaded = false,
                 Size = video.Size,
             };
-            ViewBag.Categories = categoryService.GetAll();
+            ViewBag.Categories = CategoryService.GetAll();
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditVideo([Bind(Include = "ID,Title,Description,Size,FileName,CategoryID,IsNewFileUploaded,Categories,Extension")] AdminEditVideoViewModel model)
         {
-            ViewBag.Categories = categoryService.GetAll();
+            ViewBag.Categories = CategoryService.GetAll();
             if (ModelState.IsValid)
             {
-                var video = videoService.One(v => v.ID == model.ID);
+                var video = VideoService.One(v => v.ID == model.ID);
                 if (video == null)
                 {
                     ModelState.AddModelError("", "Video Not Found");
@@ -206,7 +206,7 @@ namespace MizbanTV.Controllers
                 video.Title = model.Title;
                 video.Description = model.Description;
                 video.CategoryID = model.CategoryID;
-                videoService.Update(video);
+                VideoService.Update(video);
                 return RedirectToAction("Index");
             }
             return View(model);
