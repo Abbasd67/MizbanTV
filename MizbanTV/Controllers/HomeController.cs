@@ -31,7 +31,7 @@ namespace MizbanTV.Controllers
                 }
                 model.Categories = new List<ViewCategoriesViewModel>();
                 int i = 0;
-                foreach (var category in db.Categories.ToList())
+                foreach (var category in db.Categories.OrderBy(c=>c.Order).ToList())
                 {
                     var videoList = new List<ThumbnailViewModel>();
                     foreach (var video in videos.Where(v=>v.CategoryID == category.ID).Take(10))
