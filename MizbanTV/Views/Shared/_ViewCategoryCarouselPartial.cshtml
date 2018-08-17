@@ -1,0 +1,21 @@
+﻿@model MizbanTV.Models.ViewCategoriesViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <a href="@(Model.IsHotVideos?"#":"/Categories/View/"+Model.Category.ID)">@Model.Category.Name</a>
+            </div>
+            <div class="card-body" style="text-align:right;">
+                <p class="card-text">
+                    <div id="category-@Model.IdNumber" class="category">
+                        @foreach (var thumbnail in Model.Videos)
+                        {
+                            Html.RenderPartial("_ViewUniteGalleryPartial", thumbnail);
+                        }
+                    </div>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

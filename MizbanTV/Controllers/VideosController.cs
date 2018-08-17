@@ -31,20 +31,14 @@ namespace MizbanTV.Controllers
             var video = VideoService.One(v => v.ID == id);
             if (video == null)
                 return RedirectToAction("Index", "Home");
+            VideoService.HitAdd(video.ID);
             var relatedVideos = VideoService.GetAll().Where(v => v.ID != video.ID && v.CategoryID == video.CategoryID)
                 .OrderBy(v => Guid.NewGuid()).Take(9).ToList();
             var thumbModel = new List<ThumbnailViewModel>();
             var rand = new Random();
             foreach (var thumb in relatedVideos)
             {
-                thumbModel.Add(new ThumbnailViewModel()
-                {
-                    ID = thumb.ID,
-                    Title = thumb.Title,
-                    Description = thumb.Description,
-                    TumbName = Path.Combine(Helper.LocalThumbPath, thumb.ThumbName),
-                    Random = rand.Next(1,3)
-                });
+                thumbModel.Add(new ThumbnailViewModel(thumb, rand.Next(1, 3)));
             }
             var model = new ViewVideoViewModels()
             {
@@ -61,14 +55,5 @@ namespace MizbanTV.Controllers
             return View(model);
         }
 
-        //public ActionResult PartialViewThumb(Guid id)
-        //{
-        //    var video = VideoService.One(v => v.ID == id);
-        //    if (video == null)
-        //        return Json("");
-        //    return PartialView(new ThumbnailViewModel()
-        //    {
-        //    });
-        //}
     }
 }

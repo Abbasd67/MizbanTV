@@ -1,6 +1,9 @@
-﻿using System;
+﻿using MizbanTV.Entities;
+using MizbanTV.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -34,14 +37,47 @@ namespace MizbanTV.Models
 
     public class ThumbnailViewModel
     {
+        public ThumbnailViewModel(Video video, int random)
+        {
+            this.ID = video.ID;
+            this.Title = video.Title;
+            this.Description = video.Description;
+            this.ThumbName = Path.Combine(Helper.LocalThumbPath, video.ThumbName);
+            this.Random = random;
+        }
         public Guid ID { get; set; }
 
-        public string TumbName { get; set; }
+        public string ThumbName { get; set; }
 
         public string Title { get; set; }
 
         public string Description { get; set; }
 
         public int Random { get; set; }
+
+    }
+
+    public class ViewCategoriesViewModel
+    {
+        [Display(Name = "نام دسته بندی")]
+        public Category Category { get; set; }
+
+        [Display(Name = "ویدیو ها")]
+        public List<ThumbnailViewModel> Videos { get; set; }
+
+        public int IdNumber { get; set; }
+
+        public bool IsHotVideos { get; set; }
+    }
+    public class HomeIndexViewModel
+    {
+        [Display(Name = "جدیدترین ویدیوها")]
+        public List<ThumbnailViewModel> NewVideos { get; set; }
+
+        [Display(Name = "داغ ترین ویدیوها")]
+        public List<ThumbnailViewModel> HotVideos { get; set; }
+
+        [Display(Name = "دسته بندی ویدیوها")]
+        public List<ViewCategoriesViewModel> Categories { get; set; }
     }
 }

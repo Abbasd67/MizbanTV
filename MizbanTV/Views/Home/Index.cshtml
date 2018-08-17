@@ -1,31 +1,77 @@
-﻿@{
-    ViewBag._Title = "Home Page";
+﻿@model MizbanTV.Models.HomeIndexViewModel
+@{
+    ViewBag._Title = "صفحه اصلی";
 }
-
+@section header{
+    <div id="gallery" style="display:none;">
+        @foreach (var thumbnail in Model.NewVideos)
+        {
+            Html.RenderPartial("_ViewUniteGalleryPartial", thumbnail);
+        }
+    </div>
+}
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    @{
+        Html.RenderPartial("_ViewCategoryCarouselPartial", new MizbanTV.Models.ViewCategoriesViewModel()
+        {
+            Category = new MizbanTV.Entities.Category()
+            {
+                Name = "داغ ترین ویدیو ها"
+            },
+            Videos = Model.HotVideos,
+            IdNumber = 0,
+            IsHotVideos = true
+        });
+
+        foreach(var categoriy in Model.Categories)
+        {
+            Html.RenderPartial("_ViewCategoryCarouselPartial", categoriy);
+        }
+    }
+
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery("#gallery").unitegallery({
+                gallery_theme: "tiles",
+                tiles_type: "justified",
+                tiles_justified_space_between: 0,
+                tile_textpanel_bg_color: "#3A85E0",
+                tile_textpanel_bg_opacity: 0.8,
+                tile_textpanel_title_color: "yellow",
+                tile_textpanel_title_text_align: "center",
+                tile_textpanel_source: "desc_title",
+                tile_as_link: true,
+                tile_enable_textpanel: true,
+                tiles_enable_transition: true,
+                tile_enable_image_effect: true,
+                tile_image_effect_reverse: true,
+                tiles_justified_row_height: 250,
+                tile_enable_border: true,
+                tile_border_color: "#ffffff",
+                tile_enable_outline: true,
+                theme_gallery_padding: 15,
+                tile_textpanel_always_on: true,
+            });
+            $('.category').each(function (i, obj) {
+                $(this).unitegallery({
+                    gallery_theme: "carousel",
+                    tile_enable_textpanel: true,
+                    tile_textpanel_bg_opacity: 0.8,
+                    tile_textpanel_title_text_align: "center",
+                    tile_as_link: true,
+                    tiles_enable_transition: true,
+                    tile_textpanel_offset: 0,
+                    carousel_autoplay_direction: "left",
+                    tile_textpanel_always_on: true,
+                    carousel_autoplay: false,
+                });
+                //test
+            });
+        });
+    </script>
+}

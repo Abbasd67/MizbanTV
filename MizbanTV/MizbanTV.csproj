@@ -295,6 +295,10 @@
     <Compile Include="Migrations\201808100814592_ThumbnailAddedForVideo.Designer.cs">
       <DependentUpon>201808100814592_ThumbnailAddedForVideo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808160950365_HitsAddedForVideos.cs" />
+    <Compile Include="Migrations\201808160950365_HitsAddedForVideos.Designer.cs">
+      <DependentUpon>201808160950365_HitsAddedForVideos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
@@ -319,6 +323,38 @@
     <Content Include="Content\Images\Advertising-H.gif" />
     <Content Include="Content\plyr.css" />
     <Content Include="Content\Thumb\Piper.2016.BDRip.Ganool.IranFilm.jpg" />
+    <Content Include="Content\UniteGallery\Images\button-close.png" />
+    <Content Include="Content\UniteGallery\Images\cover-grid.png" />
+    <Content Include="Content\UniteGallery\Images\icon-link32.png" />
+    <Content Include="Content\UniteGallery\Images\icon-play32.png" />
+    <Content Include="Content\UniteGallery\Images\icon-zoom32.png" />
+    <Content Include="Content\UniteGallery\Images\lightbox-arrow-left.png" />
+    <Content Include="Content\UniteGallery\Images\lightbox-arrow-right.png" />
+    <Content Include="Content\UniteGallery\Images\lightbox-icon-close-compact.png" />
+    <Content Include="Content\UniteGallery\Images\lightbox-icon-close-compact2.png" />
+    <Content Include="Content\UniteGallery\Images\lightbox-icon-close.png" />
+    <Content Include="Content\UniteGallery\Images\loader-black1.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-black2.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-black3.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-black4.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-black5.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-black6.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-black7.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-white1.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-white2.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-white3.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-white4.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-white5.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-white6.gif" />
+    <Content Include="Content\UniteGallery\Images\loader-white7.gif" />
+    <Content Include="Content\UniteGallery\Images\loader.gif" />
+    <Content Include="Content\UniteGallery\Images\loader_bright.gif" />
+    <Content Include="Content\UniteGallery\Images\loader_skype_trans.gif" />
+    <Content Include="Content\UniteGallery\Images\not_loaded.png" />
+    <Content Include="Content\UniteGallery\Images\play-button-round.png" />
+    <Content Include="Content\UniteGallery\Images\play-button-square.png" />
+    <Content Include="Content\UniteGallery\Images\transparent.png" />
+    <Content Include="Content\UniteGallery\unite-gallery.css" />
     <Content Include="Content\Video\Piper.2016.BDRip.Ganool.IranFilm.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -351,6 +387,10 @@
     <Content Include="Scripts\plyr.polyfilled.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\UniteGallery\ug-theme-carousel.js" />
+    <Content Include="Scripts\UniteGallery\ug-theme-tiles.js" />
+    <Content Include="Scripts\UniteGallery\unitegallery.js" />
+    <Content Include="Scripts\UniteGallery\unitegallery.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -405,6 +445,8 @@
     <Content Include="Views\Admin\EditVideo.cshtml" />
     <Content Include="Views\Videos\ViewVideo.cshtml" />
     <Content Include="Views\Shared\_ViewThumbPartial.cshtml" />
+    <Content Include="Views\Shared\_ViewUniteGalleryPartial.cshtml" />
+    <Content Include="Views\Shared\_ViewCategoryCarouselPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Temp\" />
@@ -448,6 +490,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808100814592_ThumbnailAddedForVideo.resx">
       <DependentUpon>201808100814592_ThumbnailAddedForVideo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808160950365_HitsAddedForVideos.resx">
+      <DependentUpon>201808160950365_HitsAddedForVideos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

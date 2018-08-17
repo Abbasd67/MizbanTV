@@ -9,7 +9,7 @@ namespace MizbanTV
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-3.3.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/plyr").Include(
                         "~/Scripts/plyr.min.js",
@@ -26,6 +26,14 @@ namespace MizbanTV
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.bundle.js",
                       "~/Scripts/respond.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/unitegallery").Include(
+                      "~/Scripts/UniteGallery/unitegallery.js",
+                      "~/Scripts/UniteGallery/ug-theme-carousel.js",
+                      "~/Scripts/UniteGallery/ug-theme-tiles.js"));
+
+            bundles.Add(new StyleBundle("~/Content/unitegallery").Include(
+                      "~/Content/UniteGallery/unite-gallery.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

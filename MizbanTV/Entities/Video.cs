@@ -37,6 +37,8 @@ namespace MizbanTV.Entities
         [Display(Name = "تاریخ آخرین تغییر")]
         public DateTime LastModifiedDate { get; set; }
 
+        public int Hits { get; set; }
+
         [NotMapped]
         public string FileSizeString { get => Helper.ConvertFileSizeToString(Size);  }
     }

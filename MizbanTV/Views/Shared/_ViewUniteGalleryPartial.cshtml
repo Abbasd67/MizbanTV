@@ -1,0 +1,10 @@
+﻿@model MizbanTV.Models.ThumbnailViewModel
+
+
+<a href="/Videos/ViewVideo/@Model.ID">
+    <img alt="@Model.Title"
+         src="@Url.Content(Model.ThumbName)"
+         data-title="@Model.Title"
+         data-image="@Url.Content(Model.ThumbName)"
+         data-description="@Model.Description">
+</a>

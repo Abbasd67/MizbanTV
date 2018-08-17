@@ -58,6 +58,15 @@ namespace MizbanTV.Services
             }
         }
 
+        public void HitAdd(Guid id)
+        {
+            var target = One(e => e.ID == id);
+            if (target != null)
+            {
+                target.Hits++;
+                Context.SaveChanges();
+            }
+        }
 
         public void Delete (Guid id)
         {
