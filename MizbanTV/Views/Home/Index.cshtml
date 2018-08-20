@@ -55,7 +55,6 @@
                 tile_border_color: "#ffffff",
                 tile_enable_outline: true,
                 theme_gallery_padding: 15,
-                tile_textpanel_always_on: true,
             });
             $('.category').each(function (i, obj) {
                 $(this).unitegallery({
@@ -69,6 +68,8 @@
                     carousel_autoplay_direction: "left",
                     tile_textpanel_always_on: true,
                     carousel_autoplay: false,
+                    tile_enable_overlay: false,
+                    tile_enable_icons: false,
                 });
                 //test
             });

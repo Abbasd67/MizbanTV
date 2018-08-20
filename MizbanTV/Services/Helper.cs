@@ -35,11 +35,11 @@ namespace MizbanTV.Services
             else if (size > OneKiloByte)
             {
                 size /= OneKiloByte;
-                suffix = "kB";
+                suffix = "KB";
             }
             else
             {
-                suffix = " B";
+                suffix = "B";
             }
             return String.Format("{0:N2}{1}", size, suffix);
         }

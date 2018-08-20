@@ -25,7 +25,7 @@ namespace MizbanTV.Controllers
                     model.NewVideos.Add(new ThumbnailViewModel(video, random.Next(1, 3)));
                 }
                 model.HotVideos = new List<ThumbnailViewModel>();
-                foreach (var video in videos.OrderByDescending(v => v.Hits).Take(10))
+                foreach (var video in videos.OrderByDescending(v => v.Hits).Take(20))
                 {
                     model.HotVideos.Add(new ThumbnailViewModel(video, random.Next(1, 3)));
                 }
@@ -34,7 +34,7 @@ namespace MizbanTV.Controllers
                 foreach (var category in db.Categories.OrderBy(c=>c.Order).ToList())
                 {
                     var videoList = new List<ThumbnailViewModel>();
-                    foreach (var video in videos.Where(v=>v.CategoryID == category.ID).Take(10))
+                    foreach (var video in videos.Where(v=>v.CategoryID == category.ID).Take(20))
                     {
                         videoList.Add(new ThumbnailViewModel(video, random.Next(1, 3)));
                     }
