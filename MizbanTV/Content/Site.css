@@ -31,6 +31,29 @@ div#all {
     width: 100%;
     height: 100%;
 }
+
+.parallax {
+    text-align: center;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.parallax .container{
+    padding-top:60px;
+    padding-bottom:60px;
+}
+.parallax h2{
+    background-color:rgba(0,0,0,0.7);
+    padding:7px;
+}
+.parallax h2 a{
+    color:crimson;
+}
+
+/***********************************************************************************************************/
 .thumb-view {
     margin: 10px;
     float: left;

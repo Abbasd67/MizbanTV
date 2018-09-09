@@ -61,8 +61,20 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="NReco.VideoConverter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=395ccb334978a0cd, processorArchitecture=MSIL">
       <HintPath>..\packages\NReco.VideoConverter.1.1.3\lib\net20\NReco.VideoConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.3.1.1.134\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.3.1.1.134\lib\net40\StructureMap.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.web.3.1.0.133\lib\net40\StructureMap.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -170,6 +182,9 @@
     <Reference Include="Unicorn.Web">
       <HintPath>..\..\Safarkja\lib\Unicorn.Web.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -256,11 +271,17 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\VideosController.cs" />
+    <Compile Include="DependencyResolution\ControllerConvention.cs" />
+    <Compile Include="DependencyResolution\DefaultRegistry.cs" />
+    <Compile Include="DependencyResolution\IoC.cs" />
+    <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
+    <Compile Include="DependencyResolution\StructureMapScopeModule.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Video.cs" />
     <Compile Include="Global.asax.cs">
@@ -302,9 +323,14 @@
     <Compile Include="Migrations\201808160950365_HitsAddedForVideos.Designer.cs">
       <DependentUpon>201808160950365_HitsAddedForVideos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809091057491_BackGroundAddedToCategory.cs" />
+    <Compile Include="Migrations\201809091057491_BackGroundAddedToCategory.Designer.cs">
+      <DependentUpon>201809091057491_BackGroundAddedToCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
+    <Compile Include="Models\CategoryViewModels.cs" />
     <Compile Include="Models\VideoViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -314,9 +340,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\Helper.cs" />
-    <Compile Include="Services\VideoService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -451,11 +475,14 @@
     <Content Include="Views\Shared\_ViewThumbPartial.cshtml" />
     <Content Include="Views\Shared\_ViewUniteGalleryPartial.cshtml" />
     <Content Include="Views\Shared\_ViewCategoryCarouselPartial.cshtml" />
+    <Content Include="Views\Admin\CreateCategory.cshtml" />
+    <Content Include="Views\Admin\EditCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Temp\" />
     <Folder Include="App_Data\Thumb\" />
     <Folder Include="App_Data\Video\" />
+    <Folder Include="Content\Categories\" />
     <Folder Include="Content\Temp\" />
   </ItemGroup>
   <ItemGroup>
@@ -497,6 +524,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808160950365_HitsAddedForVideos.resx">
       <DependentUpon>201808160950365_HitsAddedForVideos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809091057491_BackGroundAddedToCategory.resx">
+      <DependentUpon>201809091057491_BackGroundAddedToCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

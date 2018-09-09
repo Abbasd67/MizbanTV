@@ -6,18 +6,17 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace MizbanTV.Controllers
 {
     public class VideosController : Controller
     {
-        private VideoService VideoService { get; set; }
-        private ApplicationDbContext ApplicationDbContext { get; set; }
+        private ApplicationDbContext DbContext { get; set; }
 
-        public VideosController()
+        public VideosController(ApplicationDbContext dbContext)
         {
-            ApplicationDbContext = new ApplicationDbContext();
-            VideoService = new VideoService(ApplicationDbContext);
+            DbContext = dbContext;
         }
         // GET: Videos
         public ActionResult Index()
@@ -28,12 +27,14 @@ namespace MizbanTV.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index", "Home");
-            var video = VideoService.One(v => v.ID == id);
+            var video = DbContext.Videos.Include(c=>c.Category).FirstOrDefault(v => v.ID == id);
             if (video == null)
                 return RedirectToAction("Index", "Home");
-            VideoService.HitAdd(video.ID);
-            var relatedVideos = VideoService.GetAll().Where(v => v.ID != video.ID && v.CategoryID == video.CategoryID)
-                .OrderBy(v => Guid.NewGuid()).Take(9).ToList();
+            video.Hits++;
+            DbContext.Entry(video).State = System.Data.Entity.EntityState.Modified;
+            DbContext.SaveChanges();
+            var relatedVideos = DbContext.Videos.Where(v => v.ID != video.ID && v.CategoryID == video.CategoryID)
+                .OrderBy(v => Guid.NewGuid()).Take(6).ToList();
             var thumbModel = new List<ThumbnailViewModel>();
             var rand = new Random();
             foreach (var thumb in relatedVideos)

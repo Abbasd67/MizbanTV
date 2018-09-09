@@ -72,5 +72,15 @@ namespace MizbanTV.Models
 
         public string Extension { get; set; }
     }
+
+    public class AdminCreateCategoryViewModel
+    {
+        public AdminCreateCategoryViewModel()
+        {
+            Images = new List<HttpPostedFileBase>();
+        }
+        public List<HttpPostedFileBase> Images { get; set; }
+        public Category Category { get; set; }
+    }
     
 }

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using System.IO;
 
 namespace MizbanTV.Controllers
 {
@@ -16,11 +18,10 @@ namespace MizbanTV.Controllers
             var model = new HomeIndexViewModel();
             using (var db = new ApplicationDbContext())
             {
-                var videoService = new VideoService(db);
-                var videos = videoService.GetAll();
+                var videos = db.Videos.Include(v => v.Category).ToList();
                 model.NewVideos = new List<ThumbnailViewModel>();
                 var random = new Random();
-                foreach (var video in videos.OrderByDescending(v => v.CreateDate).Take(10))
+                foreach (var video in videos.OrderByDescending(v => v.CreateDate).Take(6))
                 {
                     model.NewVideos.Add(new ThumbnailViewModel(video, random.Next(1, 3)));
                 }
@@ -38,11 +39,16 @@ namespace MizbanTV.Controllers
                     {
                         videoList.Add(new ThumbnailViewModel(video, random.Next(1, 3)));
                     }
+                    if(string.IsNullOrEmpty(category.BackgroundImage))
+                    {
+                        category.BackgroundImage = "blank.png";
+                    }
                     model.Categories.Add(new ViewCategoriesViewModel
                     {
                         Category = category,
                         Videos = videoList,
                         IdNumber = ++i,
+                        BackgroundImage = Path.Combine(Helper.LocalCategoriesPath, category.BackgroundImage),
                         IsHotVideos = false
                     });
                 }

@@ -57,18 +57,6 @@ namespace MizbanTV.Models
 
     }
 
-    public class ViewCategoriesViewModel
-    {
-        [Display(Name = "نام دسته بندی")]
-        public Category Category { get; set; }
-
-        [Display(Name = "ویدیو ها")]
-        public List<ThumbnailViewModel> Videos { get; set; }
-
-        public int IdNumber { get; set; }
-
-        public bool IsHotVideos { get; set; }
-    }
     public class HomeIndexViewModel
     {
         [Display(Name = "جدیدترین ویدیوها")]

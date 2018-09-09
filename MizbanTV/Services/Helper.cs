@@ -18,6 +18,7 @@ namespace MizbanTV.Services
         public const string LocalTempPath = "~/Content/Temp";
         public const string LocalVideoPath = "~/Content/Video";
         public const string LocalThumbPath = "~/Content/Thumb";
+        public const string LocalCategoriesPath = "~/Content/Categories";
         public static string ConvertFileSizeToString(long fileSize)
         {
             decimal size = fileSize;
@@ -60,15 +61,19 @@ namespace MizbanTV.Services
 
         public static string GetThumbPath() => HttpContext.Current.Server.MapPath(LocalThumbPath);
 
+        public static string GetCategoryPath() => HttpContext.Current.Server.MapPath(LocalCategoriesPath);
+
         public static Video SaveVideo(Video video, string fileName)
         {
+            var tumbPath = GetThumbPath();
+            var videoPath = GetVideoPath();
             string fileExtension = Path.GetExtension(fileName);
             string fileNameWithoutExtention = Path.GetFileNameWithoutExtension(fileName);
-            string currentVideoPath = Path.Combine(GetVideoPath(), video.FileName);
+            string currentVideoPath = Path.Combine(videoPath, video.FileName);
             string tempPath = Path.Combine(GetTempPath(), video.ID.ToString() + "." + fileExtension);
-            string newVideoPath = Path.Combine(GetVideoPath(), fileName);
-            string currentThumbPath = Path.Combine(GetThumbPath(), fileNameWithoutExtention + ImageExtention);
-            string newThumbPath = Path.Combine(GetThumbPath(), fileNameWithoutExtention + ImageExtention);
+            string newVideoPath = Path.Combine(videoPath, fileName);
+            string currentThumbPath = Path.Combine(tumbPath, fileNameWithoutExtention + ImageExtention);
+            string newThumbPath = Path.Combine(tumbPath, fileNameWithoutExtention + ImageExtention);
             if (File.Exists(currentVideoPath))
                 File.Delete(currentVideoPath);
             if (File.Exists(currentThumbPath))

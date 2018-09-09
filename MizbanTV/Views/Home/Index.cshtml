@@ -10,26 +10,25 @@
         }
     </div>
 }
-<div class="jumbotron">
-    @{
-        Html.RenderPartial("_ViewCategoryCarouselPartial", new MizbanTV.Models.ViewCategoriesViewModel()
+@{
+    Html.RenderPartial("_ViewCategoryCarouselPartial", new MizbanTV.Models.ViewCategoriesViewModel()
+    {
+        Category = new MizbanTV.Entities.Category()
         {
-            Category = new MizbanTV.Entities.Category()
-            {
-                Name = "داغ ترین ویدیو ها"
-            },
-            Videos = Model.HotVideos,
-            IdNumber = 0,
-            IsHotVideos = true
-        });
+            Name = "داغ ترین ویدیو ها"
+        },
+        Videos = Model.HotVideos,
+        IdNumber = 0,
+        IsHotVideos = true,
+        BackgroundImage = "~/Content/Categories/Hot.jpg"
+    });
 
-        foreach(var categoriy in Model.Categories)
-        {
-            Html.RenderPartial("_ViewCategoryCarouselPartial", categoriy);
-        }
+    foreach (var categoriy in Model.Categories)
+    {
+        Html.RenderPartial("_ViewCategoryCarouselPartial", categoriy);
     }
+}
 
-</div>
 
 
 @section scripts
@@ -58,6 +57,8 @@
             });
             $('.category').each(function (i, obj) {
                 $(this).unitegallery({
+                    tile_width: 200,
+                    tile_height: 150,
                     gallery_theme: "carousel",
                     tile_enable_textpanel: true,
                     tile_textpanel_bg_opacity: 0.8,

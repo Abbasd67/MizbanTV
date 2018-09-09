@@ -19,6 +19,9 @@ namespace MizbanTV.Entities
         [Display(Name = "شماره ترتیب")]
         public int Order { get; set; }
 
+        [Display(Name = "عکس پس زمینه")]
+        public string BackgroundImage { get; set; }
+
         public virtual List<Video> Videos { get; set; }
     }
 }
