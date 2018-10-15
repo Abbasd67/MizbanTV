@@ -37,6 +37,7 @@ namespace MizbanTV
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/irfonts.css",
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/plyr").Include(

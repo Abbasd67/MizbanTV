@@ -1,0 +1,62 @@
+﻿@model MizbanTV.Models.AdminCreateAdvertiseViewModel
+@{
+    ViewBag._Title = "تبلیغ جدید";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewBag._Title</h2>
+
+
+@using (Html.BeginForm("CreateAdvertise", "Admin", FormMethod.Post, new { encType = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Category</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Advertise.ID)
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Advertise.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Advertise.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Advertise.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.Advertise.AdvertiseType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(x => Model.Advertise.AdvertiseType, new SelectList(ViewBag.AdvertiseTypes, "ID", "Name"),
+                        "--لطفا انتخاب کنید--", htmlAttributes: new { @class = "form-control", id = "Categories" })
+                @Html.ValidationMessageFor(x => x.Advertise.AdvertiseType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Advertise.Link, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Advertise.Link, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Advertise.Link, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Advertise.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Advertise.FileName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(m => m.Images, new { type = "file", name = "Files" })
+                @Html.ValidationMessageFor(model => model.Advertise.FileName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="دخیره" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

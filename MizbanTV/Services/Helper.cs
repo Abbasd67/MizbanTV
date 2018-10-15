@@ -19,6 +19,7 @@ namespace MizbanTV.Services
         public const string LocalVideoPath = "~/Content/Video";
         public const string LocalThumbPath = "~/Content/Thumb";
         public const string LocalCategoriesPath = "~/Content/Categories";
+        public const string LocalAdvertiesePath = "~/Content/Advertises";
         public static string ConvertFileSizeToString(long fileSize)
         {
             decimal size = fileSize;
@@ -62,6 +63,8 @@ namespace MizbanTV.Services
         public static string GetThumbPath() => HttpContext.Current.Server.MapPath(LocalThumbPath);
 
         public static string GetCategoryPath() => HttpContext.Current.Server.MapPath(LocalCategoriesPath);
+
+        public static string GetAdvertisePath() => HttpContext.Current.Server.MapPath(LocalAdvertiesePath);
 
         public static Video SaveVideo(Video video, string fileName)
         {

@@ -13,46 +13,73 @@ namespace MizbanTV.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext DbContext { get; set; }
+
+        public HomeController(ApplicationDbContext dbContext)
+        {
+            DbContext = dbContext;
+        }
         public ActionResult Index()
         {
             var model = new HomeIndexViewModel();
-            using (var db = new ApplicationDbContext())
+            var videos = DbContext.Videos.Include(v => v.Category).ToList();
+            model.NewVideos = new List<ThumbnailViewModel>();
+            var random = new Random();
+            foreach (var video in videos.OrderByDescending(v => v.CreateDate).Take(6))
             {
-                var videos = db.Videos.Include(v => v.Category).ToList();
-                model.NewVideos = new List<ThumbnailViewModel>();
-                var random = new Random();
-                foreach (var video in videos.OrderByDescending(v => v.CreateDate).Take(6))
-                {
-                    model.NewVideos.Add(new ThumbnailViewModel(video, random.Next(1, 3)));
-                }
-                model.HotVideos = new List<ThumbnailViewModel>();
-                foreach (var video in videos.OrderByDescending(v => v.Hits).Take(20))
-                {
-                    model.HotVideos.Add(new ThumbnailViewModel(video, random.Next(1, 3)));
-                }
-                model.Categories = new List<ViewCategoriesViewModel>();
-                int i = 0;
-                foreach (var category in db.Categories.OrderBy(c=>c.Order).ToList())
-                {
-                    var videoList = new List<ThumbnailViewModel>();
-                    foreach (var video in videos.Where(v=>v.CategoryID == category.ID).Take(20))
-                    {
-                        videoList.Add(new ThumbnailViewModel(video, random.Next(1, 3)));
-                    }
-                    if(string.IsNullOrEmpty(category.BackgroundImage))
-                    {
-                        category.BackgroundImage = "blank.png";
-                    }
-                    model.Categories.Add(new ViewCategoriesViewModel
-                    {
-                        Category = category,
-                        Videos = videoList,
-                        IdNumber = ++i,
-                        BackgroundImage = Path.Combine(Helper.LocalCategoriesPath, category.BackgroundImage),
-                        IsHotVideos = false
-                    });
-                }
+                model.NewVideos.Add(new ThumbnailViewModel(video, random.Next(1, 3)));
             }
+            model.HotVideos = new List<ThumbnailViewModel>();
+            foreach (var video in videos.OrderByDescending(v => v.Hits).Take(20))
+            {
+                model.HotVideos.Add(new ThumbnailViewModel(video, random.Next(1, 3)));
+            }
+            model.Categories = new List<ViewCategoriesViewModel>();
+            int i = 0;
+            foreach (var category in DbContext.Categories.OrderBy(c => c.Order).ToList())
+            {
+                var videoList = new List<ThumbnailViewModel>();
+                foreach (var video in videos.Where(v => v.CategoryID == category.ID).Take(20))
+                {
+                    videoList.Add(new ThumbnailViewModel(video, random.Next(1, 3)));
+                }
+                if (string.IsNullOrEmpty(category.BackgroundImage))
+                {
+                    category.BackgroundImage = "blank.png";
+                }
+                model.Categories.Add(new ViewCategoriesViewModel
+                {
+                    Category = category,
+                    Videos = videoList,
+                    IdNumber = ++i,
+                    BackgroundImage = Path.Combine(Helper.LocalCategoriesPath, category.BackgroundImage),
+                    IsHotVideos = false
+                });
+            }
+            model.Advertises = new List<Advertise>();
+            foreach (var advertise in DbContext.Advertises.Where(a => a.AdvertiseType == AdvertiseType.Horizontal)
+                .OrderBy(a => Guid.NewGuid()).Take(model.Categories.Count).ToList())
+            {
+                model.Advertises.Add(new Advertise
+                {
+                    AdvertiseType = AdvertiseType.Horizontal,
+                    FileName = Path.Combine(Helper.LocalAdvertiesePath, advertise.FileName),
+                    Link = advertise.Link,
+                    Title = advertise.Title
+                });
+            }
+            for (i = model.Advertises.Count; i < model.Categories.Count; i++)
+            {
+                model.Advertises.Add(new Advertise
+                {
+                    AdvertiseType = AdvertiseType.Horizontal,
+                    FileName = Path.Combine(Helper.LocalAdvertiesePath, "Advertising-H.gif"),
+                    Link = "/Home/Contact"
+                });
+            }
+
+
+
             return View(model);
         }
 

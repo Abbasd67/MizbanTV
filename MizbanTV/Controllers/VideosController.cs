@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using MizbanTV.Entities;
 
 namespace MizbanTV.Controllers
 {
@@ -41,6 +42,29 @@ namespace MizbanTV.Controllers
             {
                 thumbModel.Add(new ThumbnailViewModel(thumb, rand.Next(1, 3)));
             }
+            var advertises = new List<Advertise>();
+
+            foreach (var advertise in DbContext.Advertises.Where(a => a.AdvertiseType == AdvertiseType.Horizontal)
+                .OrderBy(a => Guid.NewGuid()).Take(3).ToList())
+            {
+                advertises.Add(new Advertise
+                {
+                    AdvertiseType = AdvertiseType.Horizontal,
+                    FileName = Path.Combine(Helper.LocalAdvertiesePath, advertise.FileName),
+                    Link = advertise.Link,
+                    Title = advertise.Title
+                });
+            }
+            if(advertises.Count<3)
+            {
+
+                advertises.Add(new Advertise
+                {
+                    AdvertiseType = AdvertiseType.Vertical,
+                    FileName = Path.Combine(Helper.LocalAdvertiesePath, "Advertising-V.png"),
+                    Link = "/Home/Contact"
+                });
+            }
             var model = new ViewVideoViewModels()
             {
                 ID = video.ID,
@@ -51,7 +75,8 @@ namespace MizbanTV.Controllers
                 Size = video.FileSizeString,
                 ThumbName = Path.Combine(Helper.LocalThumbPath, video.ThumbName),
                 CreationDate = Helper.ConvertMiladiToShamsi(video.CreateDate).ToLongDateString(),
-                ThumbNails = thumbModel
+                ThumbNails = thumbModel,
+                Advertises = advertises
             };
             return View(model);
         }

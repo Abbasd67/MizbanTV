@@ -331,6 +331,10 @@ ASALocalRun/
 /MizbanTV_Report.htm
 /MizbanTV/App_Data/Temp
 /MizbanTV/Content/Categories/*
+!/MizbanTV/Content/Categories/blank.png
 /MizbanTV/Content/Temp/*
 /MizbanTV/Content/Video/*
 /MizbanTV/Content/Thumb/*
+/MizbanTV/Content/Advertises/*
+!/MizbanTV/Content/Advertises/Advertising-V.png
+!/MizbanTV/Content/Advertises/Advertising-H.gif

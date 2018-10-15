@@ -33,6 +33,8 @@ namespace MizbanTV.Models
         public string CreationDate { get; set; }
 
         public IEnumerable<ThumbnailViewModel> ThumbNails { get; set; }
+
+        public List<Advertise> Advertises { get; set; }
     }
 
     public class ThumbnailViewModel
@@ -67,5 +69,8 @@ namespace MizbanTV.Models
 
         [Display(Name = "دسته بندی ویدیوها")]
         public List<ViewCategoriesViewModel> Categories { get; set; }
+
+        [Display(Name = "تبلیغات")]
+        public List<Advertise> Advertises { get; set; }
     }
 }

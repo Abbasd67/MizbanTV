@@ -42,5 +42,6 @@ namespace MizbanTV.Models
 
         public virtual DbSet<Video> Videos { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Advertise> Advertises { get; set; }
     }
 }

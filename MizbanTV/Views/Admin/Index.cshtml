@@ -11,35 +11,35 @@
 <a href="/Admin/CreateCategory" class="btn btn-primary m-3">دسته بندی جدید</a>
 
 @(Html.Kendo().Grid<MizbanTV.Entities.Category>()
-                    .Name("Categories")
-                    .Columns(columns =>
-                    {
-                        columns.Bound(p => p.Name);
-                        columns.Bound(p => p.Order);
-                        columns.Command(command =>
+                        .Name("Categories")
+                        .Columns(columns =>
                         {
-                            command.Custom("Edit").Click("editCategory");
-                            command.Destroy();
-                        }).Width(250);
-                    })
-                    .Pageable()
-                    .Navigatable()
-                    .Sortable()
-                    .Scrollable()
-                    .DataSource(dataSource => dataSource
-                        .Ajax()
-                        .Batch(true)
-                        .PageSize(20)
-                        .ServerOperation(false)
-                        .Events(events => events.Error("error_handler"))
-                        .Model(model =>
-                        {
-                            model.Id(p => p.ID);
-                            model.Field(id => id.ID).DefaultValue(Guid.NewGuid());
+                            columns.Bound(p => p.Name);
+                            columns.Bound(p => p.Order);
+                            columns.Command(command =>
+                            {
+                                command.Custom("Edit").Click("editCategory");
+                                command.Destroy();
+                            }).Width(250);
                         })
-                        .Read("CategoryRead", "Admin")
-                        .Destroy("CategoryDestroy", "Admin")
-                    )
+                        .Pageable()
+                        .Navigatable()
+                        .Sortable()
+                        .Scrollable()
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Batch(true)
+                            .PageSize(20)
+                            .ServerOperation(false)
+                            .Events(events => events.Error("error_handler"))
+                            .Model(model =>
+                            {
+                                model.Id(p => p.ID);
+                                model.Field(id => id.ID).DefaultValue(Guid.NewGuid());
+                            })
+                            .Read("CategoryRead", "Admin")
+                            .Destroy("CategoryDestroy", "Admin")
+                        )
 )
 
 <p></p>
@@ -51,37 +51,76 @@
 <a href="/Admin/CreateVideo" class="btn btn-primary m-3">مطلب جدید</a>
 
 @(Html.Kendo().Grid<MizbanTV.Models.AdminIndexVideoViewModel>()
-            .Name("Videos")
-            .Columns(columns =>
-            {
-                columns.Bound(p => p.Title);
-                columns.Bound(p => p.Description);
-                columns.Bound(p => p.CategoryName);
-                columns.Bound(p => p.FileName);
-                columns.Command(command =>
+                .Name("Videos")
+                .Columns(columns =>
                 {
-                    command.Custom("View").Click("viewVideo");
-                    command.Custom("Edit").Click("editVideo");
-                    command.Destroy();
-                }).Width(300);
-            })
-            .Pageable()
-            .Navigatable()
-            .Sortable()
-            .Scrollable()
-            .DataSource(dataSource => dataSource
-                .Ajax()
-                .Batch(true)
-                .PageSize(20)
-                .ServerOperation(false)
-                .Events(events => events.Error("error_handler"))
-                .Model(model =>
-                {
-                    model.Id(p => p.ID);
+                    columns.Bound(p => p.Title);
+                    columns.Bound(p => p.Description);
+                    columns.Bound(p => p.CategoryName);
+                    columns.Bound(p => p.FileName);
+                    columns.Command(command =>
+                    {
+                        command.Custom("View").Click("viewVideo");
+                        command.Custom("Edit").Click("editVideo");
+                        command.Destroy();
+                    }).Width(300);
                 })
-                .Read("VideoRead", "Admin")
-                .Destroy("VideoDestroy", "Admin")
-            )
+                .Pageable()
+                .Navigatable()
+                .Sortable()
+                .Scrollable()
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Batch(true)
+                    .PageSize(20)
+                    .ServerOperation(false)
+                    .Events(events => events.Error("error_handler"))
+                    .Model(model =>
+                    {
+                        model.Id(p => p.ID);
+                    })
+                    .Read("VideoRead", "Admin")
+                    .Destroy("VideoDestroy", "Admin")
+                )
+)
+<p></p>
+<p></p>
+<h2>
+    تبلیغات
+</h2>
+
+<a href="/Admin/CreateAdvertise" class="btn btn-primary m-3">تبلیغ جدید</a>
+
+@(Html.Kendo().Grid<MizbanTV.Entities.Advertise> ()
+                .Name("Advertises")
+                .Columns(columns =>
+                {
+                    columns.Bound(p => p.Title);
+                    columns.Bound(p => p.Link);
+                    columns.Bound(p => p.AdvertiseType);
+                    columns.Command(command =>
+                    {
+                        command.Custom("Edit").Click("editAdvertise");
+                        command.Destroy();
+                    }).Width(300);
+                })
+                .Pageable()
+                .Navigatable()
+                .Sortable()
+                .Scrollable()
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Batch(true)
+                    .PageSize(20)
+                    .ServerOperation(false)
+                    .Events(events => events.Error("error_handler"))
+                    .Model(model =>
+                    {
+                        model.Id(p => p.ID);
+                    })
+                    .Read("AdvertiseRead", "Admin")
+                    .Destroy("AdvertiseDestroy", "Admin")
+                )
 )
 
 @section scripts{
@@ -94,6 +133,9 @@
         }
         function editCategory(e) {
             window.location.href = '/Admin/EditCategory/' + this.dataItem($(e.currentTarget).closest("tr")).ID;
+        }
+        function editAdvertise(e) {
+            window.location.href = '/Admin/EditAdvertise/' + this.dataItem($(e.currentTarget).closest("tr")).ID;
         }
     </script>
 }

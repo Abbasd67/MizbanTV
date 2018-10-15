@@ -23,9 +23,10 @@
         BackgroundImage = "~/Content/Categories/Hot.jpg"
     });
 
-    foreach (var categoriy in Model.Categories)
+    for (int i = 0; i < Model.Categories.Count; i++)
     {
-        Html.RenderPartial("_ViewCategoryCarouselPartial", categoriy);
+        Html.RenderPartial("_ViewAdvertisePartial", Model.Advertises[i]);
+        Html.RenderPartial("_ViewCategoryCarouselPartial", Model.Categories[i]);
     }
 }
 
@@ -57,8 +58,8 @@
             });
             $('.category').each(function (i, obj) {
                 $(this).unitegallery({
-                    tile_width: 200,
-                    tile_height: 150,
+                    tile_width: 300,
+                    tile_height: 200,
                     gallery_theme: "carousel",
                     tile_enable_textpanel: true,
                     tile_textpanel_bg_opacity: 0.8,
@@ -72,7 +73,6 @@
                     tile_enable_overlay: false,
                     tile_enable_icons: false,
                 });
-                //test
             });
         });
     </script>

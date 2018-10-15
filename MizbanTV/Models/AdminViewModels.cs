@@ -78,9 +78,23 @@ namespace MizbanTV.Models
         public AdminCreateCategoryViewModel()
         {
             Images = new List<HttpPostedFileBase>();
+            Category = new Category();
         }
         public List<HttpPostedFileBase> Images { get; set; }
         public Category Category { get; set; }
+    }
+
+
+    public class AdminCreateAdvertiseViewModel
+    {
+
+        public AdminCreateAdvertiseViewModel()
+        {
+            Images = new List<HttpPostedFileBase>();
+            Advertise = new Advertise();
+        }
+        public List<HttpPostedFileBase> Images { get; set; }
+        public Advertise Advertise { get; set; }
     }
     
 }

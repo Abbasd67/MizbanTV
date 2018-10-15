@@ -1,4 +1,12 @@
-﻿body {
+﻿@font-face {
+    font-family: myFirstFont;
+    src: url(sansation_light.woff);
+}
+
+body {
+    background: #4ECDC4; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #556270, #4ECDC4); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #556270, #4ECDC4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     padding-bottom: 20px;
 }
 
@@ -48,9 +56,10 @@ div#all {
 .parallax h2{
     background-color:rgba(0,0,0,0.7);
     padding:7px;
+    font-family:IRTitr;
 }
 .parallax h2 a{
-    color:crimson;
+    color:#4bf7ff;
 }
 
 /***********************************************************************************************************/
@@ -281,7 +290,6 @@ div#all {
     opacity: 0;
     transform: scale(0);
     transition: all 0.5s linear;
-    padding-
 }
 
 .thumb-view3 a.info {
