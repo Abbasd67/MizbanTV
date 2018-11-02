@@ -1,11 +1,11 @@
 ﻿@model MizbanTV.Models.ViewCategoriesViewModel
 
-<div class="parallax" style="background-image: url('@Url.Content(Model.BackgroundImage)');">
-    <div style="background-color: rgba(20,20,20,0.3);">
+<div class="parallax">
+    <div>
         <h2>
-            <a href="@(Model.IsHotVideos?"#":"/Categories/View/"+Model.Category.ID)">@Model.Category.Name</a>
+            <a href="@("/Categories/View/"+Model.Category.ID)">@Model.Category.Name</a>
         </h2>
-        <div @*class="container"*@>
+        <div>
             <div id="category-@Model.IdNumber" class="category">
                 @foreach (var thumbnail in Model.Videos)
                 {

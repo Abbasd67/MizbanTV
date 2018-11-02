@@ -4,9 +4,7 @@
 }
 
 body {
-    background: #4ECDC4; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #556270, #4ECDC4); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #556270, #4ECDC4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-color: #cacaca;
     padding-bottom: 20px;
 }
 
@@ -47,19 +45,19 @@ div#all {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    
+    background-color: #fff;
 }
 .parallax .container{
     padding-top:60px;
     padding-bottom:60px;
 }
 .parallax h2{
-    background-color:rgba(0,0,0,0.7);
+    background-color:rgb(132, 132, 132);
     padding:7px;
     font-family:IRTitr;
 }
 .parallax h2 a{
-    color:#4bf7ff;
+    color:#ff4b4b;
 }
 
 /***********************************************************************************************************/

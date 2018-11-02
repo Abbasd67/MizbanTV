@@ -46,25 +46,37 @@
         </div>
 
 
-        <div class="form-group col">
-            @(Html.Kendo().Upload()
-                    .Name("videos")
-                    .Multiple(false)
-                    .Async(a => a
-                        .Save("SaveVideo", "Admin")
-                        .AutoUpload(true)
-                    )
-                    .Files(files =>
-                    {
-                        if (!string.IsNullOrEmpty(Model.FileName))
-                            files.Add().Name(Model.FileName).Size(Model.Size).Extension(Model.Extension);
-                    })
-                    .Events(e => e
-                        .Upload("onUpload")
-                        .Success("onSuccess")
-                    )
-                    .Validation(validation => validation.AllowedExtensions(new string[] { ".mp4" }))
-            )
+        <div class="form-group">
+            @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @(Html.Kendo().Upload()
+                            .Name("videos")
+                            .Multiple(false)
+                            .Async(a => a
+                                .Save("SaveVideo", "Admin")
+                                .AutoUpload(true)
+                            )
+                            .Files(files =>
+                            {
+                                if (!string.IsNullOrEmpty(Model.FileName))
+                                    files.Add().Name(Model.FileName).Size(Model.Size).Extension(Model.Extension);
+                            })
+                            .Events(e => e
+                                .Upload("onUpload")
+                                .Success("onSuccess")
+                            )
+                            .Validation(validation => validation.AllowedExtensions(new string[] { ".mp4" }))
+                )
+                @Html.ValidationMessageFor(x => x.FileName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BackGroundImage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.BackGroundImage, new { type = "file", name = "Files" })
+                @Html.ValidationMessageFor(model => model.BackGroundImage, "", new { @class = "text-danger" })
+            </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

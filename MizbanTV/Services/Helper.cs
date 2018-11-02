@@ -66,7 +66,7 @@ namespace MizbanTV.Services
 
         public static string GetAdvertisePath() => HttpContext.Current.Server.MapPath(LocalAdvertiesePath);
 
-        public static Video SaveVideo(Video video, string fileName)
+        public static Video SaveVideo(Video video, string fileName, List<HttpPostedFileBase> backGroundImages)
         {
             var tumbPath = GetThumbPath();
             var videoPath = GetVideoPath();
@@ -82,8 +82,17 @@ namespace MizbanTV.Services
             if (File.Exists(currentThumbPath))
                 File.Delete(currentThumbPath);
             File.Copy(tempPath, newVideoPath, true);
-            var ffMpeg = new NReco.VideoConverter.FFMpegConverter();
-            ffMpeg.GetVideoThumbnail(newVideoPath, newThumbPath, 5);
+
+            if (backGroundImages.Count > 0 && backGroundImages[0] != null)
+            {
+                var image = backGroundImages[0];
+                image.SaveAs(newThumbPath);
+            }
+            else
+            {
+                var ffMpeg = new NReco.VideoConverter.FFMpegConverter();
+                ffMpeg.GetVideoThumbnail(newVideoPath, newThumbPath, 5);
+            }
             File.Delete(tempPath);
             video.LastModifiedDate = DateTime.Now;
             video.FileName = fileName;

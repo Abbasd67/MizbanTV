@@ -190,6 +190,7 @@ namespace MizbanTV.Controllers
                     category.BackgroundImage = "blank.png";
                 }
                 DbContext.Categories.Add(category);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -263,8 +264,9 @@ namespace MizbanTV.Controllers
                     Description = model.Description,
                     FileName = model.FileName
                 };
-                video = Helper.SaveVideo(video, model.FileName);
+                video = Helper.SaveVideo(video, model.FileName, model.BackGroundImage);
                 DbContext.Videos.Add(video);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -323,7 +325,7 @@ namespace MizbanTV.Controllers
                 }
                 if (model.IsNewFileUploaded)
                 {
-                    video = Helper.SaveVideo(video, model.FileName);
+                    video = Helper.SaveVideo(video, model.FileName, model.BackGroundImage);
                 }
                 video.LastModifiedDate = DateTime.Now;
                 video.Title = model.Title;

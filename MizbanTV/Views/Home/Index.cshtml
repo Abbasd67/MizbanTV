@@ -10,18 +10,22 @@
         }
     </div>
 }
+    <div class="parallax" >
+        <div >
+            <h2>
+                داغ ترین ویدیو ها
+            </h2>
+            <div>
+                <div id="category-0" class="category">
+                    @foreach (var thumbnail in Model.HotVideos)
+                {
+                    Html.RenderPartial("_ViewUniteGalleryPartial", thumbnail);
+                }
+                </div>
+            </div>
+        </div>
+    </div>
 @{
-    Html.RenderPartial("_ViewCategoryCarouselPartial", new MizbanTV.Models.ViewCategoriesViewModel()
-    {
-        Category = new MizbanTV.Entities.Category()
-        {
-            Name = "داغ ترین ویدیو ها"
-        },
-        Videos = Model.HotVideos,
-        IdNumber = 0,
-        IsHotVideos = true,
-        BackgroundImage = "~/Content/Categories/Hot.jpg"
-    });
 
     for (int i = 0; i < Model.Categories.Count; i++)
     {
