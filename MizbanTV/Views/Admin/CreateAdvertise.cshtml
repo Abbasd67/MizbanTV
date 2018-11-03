@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ViewBag._Title</h2>
+<h2>@ViewBag._Title</h2>
 
 
 @using (Html.BeginForm("CreateAdvertise", "Admin", FormMethod.Post, new { encType = "multipart/form-data" }))
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Category</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Advertise.ID)

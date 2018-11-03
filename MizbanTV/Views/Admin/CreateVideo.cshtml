@@ -8,7 +8,7 @@
 
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateVideo", "Admin", FormMethod.Post, new { encType = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -66,10 +66,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BackGroundImage, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.BackGroundImage, new { type = "file", name = "Files" })
-                @Html.ValidationMessageFor(model => model.BackGroundImage, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(m => m.Images, new { type = "file", name = "Files" })
+                @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">

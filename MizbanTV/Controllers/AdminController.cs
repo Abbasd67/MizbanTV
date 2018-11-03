@@ -249,7 +249,7 @@ namespace MizbanTV.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateVideo([Bind(Include = "ID,Title,Description,FileName,CategoryID")] AdminCreateVideoViewModel model)
+        public ActionResult CreateVideo(AdminCreateVideoViewModel model)
         {
             ViewBag.Categories = DbContext.Categories.OrderBy(c => c.Order).ToList();
             if (ModelState.IsValid)
@@ -264,7 +264,7 @@ namespace MizbanTV.Controllers
                     Description = model.Description,
                     FileName = model.FileName
                 };
-                video = Helper.SaveVideo(video, model.FileName, model.BackGroundImage);
+                video = Helper.SaveVideo(video, model.FileName, model.Images);
                 DbContext.Videos.Add(video);
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");
@@ -312,7 +312,7 @@ namespace MizbanTV.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditVideo([Bind(Include = "ID,Title,Description,Size,FileName,CategoryID,IsNewFileUploaded,Categories,Extension")] AdminEditVideoViewModel model)
+        public ActionResult EditVideo(AdminEditVideoViewModel model)
         {
             ViewBag.Categories = DbContext.Categories.OrderBy(c => c.Order).ToList();
             if (ModelState.IsValid)
@@ -325,7 +325,7 @@ namespace MizbanTV.Controllers
                 }
                 if (model.IsNewFileUploaded)
                 {
-                    video = Helper.SaveVideo(video, model.FileName, model.BackGroundImage);
+                    video = Helper.SaveVideo(video, model.FileName, model.Images);
                 }
                 video.LastModifiedDate = DateTime.Now;
                 video.Title = model.Title;

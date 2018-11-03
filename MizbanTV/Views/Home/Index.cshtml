@@ -10,21 +10,21 @@
         }
     </div>
 }
-    <div class="parallax" >
-        <div >
-            <h2>
-                داغ ترین ویدیو ها
-            </h2>
-            <div>
-                <div id="category-0" class="category">
-                    @foreach (var thumbnail in Model.HotVideos)
+<div class="parallax">
+    <div>
+        <h2>
+            <a href="#">داغ ترین ویدیو ها</a>
+        </h2>
+        <div>
+            <div id="hotVideos">
+                @foreach (var thumbnail in Model.HotVideos)
                 {
                     Html.RenderPartial("_ViewUniteGalleryPartial", thumbnail);
                 }
-                </div>
             </div>
         </div>
     </div>
+</div>
 @{
 
     for (int i = 0; i < Model.Categories.Count; i++)
@@ -59,6 +59,22 @@
                 tile_border_color: "#ffffff",
                 tile_enable_outline: true,
                 theme_gallery_padding: 15,
+            });
+            jQuery("#hotVideos").unitegallery({
+                tile_width: 250,
+                tile_height: 170,
+                gallery_theme: "carousel",
+                tile_enable_textpanel: true,
+                tile_textpanel_bg_opacity: 0.8,
+                tile_textpanel_title_text_align: "center",
+                tile_as_link: true,
+                tiles_enable_transition: true,
+                tile_textpanel_offset: 0,
+                carousel_autoplay_direction: "left",
+                tile_textpanel_always_on: true,
+                carousel_autoplay: false,
+                tile_enable_overlay: false,
+                tile_enable_icons: false,
             });
             $('.category').each(function (i, obj) {
                 $(this).unitegallery({

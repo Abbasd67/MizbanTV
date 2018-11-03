@@ -46,7 +46,7 @@ namespace MizbanTV.Models
         public Guid CategoryID { get; set; }
 
         [Display(Name = "انتخاب پس زمینه")]
-        public List<HttpPostedFileBase> BackGroundImage { get; set; }
+        public List<HttpPostedFileBase> Images { get; set; }
     }
 
     public class AdminEditVideoViewModel
@@ -76,7 +76,7 @@ namespace MizbanTV.Models
         public string Extension { get; set; }
 
         [Display(Name = "انتخاب پس زمینه")]
-        public List<HttpPostedFileBase> BackGroundImage { get; set; }
+        public List<HttpPostedFileBase> Images { get; set; }
     }
 
     public class AdminCreateCategoryViewModel
