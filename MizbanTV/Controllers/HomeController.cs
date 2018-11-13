@@ -83,6 +83,12 @@ namespace MizbanTV.Controllers
             return View(model);
         }
 
+        public PartialViewResult MenuPartial()
+        {
+            var categories = DbContext.Categories.OrderBy(c => c.Order).ToList();
+            return PartialView("_ViewMenuPartial", categories);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

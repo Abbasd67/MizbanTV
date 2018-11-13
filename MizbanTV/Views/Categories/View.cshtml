@@ -1,0 +1,38 @@
+﻿@model MizbanTV.Models.ViewCategoriesViewModel
+@{
+    ViewBag._Title = "نمایش دسته بندی";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag._Title</h2>
+
+
+<div style="text-align:center;">
+    <div class="col-md-12">
+        <h2>MIZBAN TV</h2>
+    </div>
+    <div class="col-md-12">
+        <h3>@Model.Category.Name</h3>
+    </div>
+    <div class="col-md-12">
+        <img src="~/Content/Images/Advertising-H.gif" />
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    @foreach (var thumb in Model.Videos)
+                    {
+                        Html.RenderPartial("_ViewThumbPartial", thumb);
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                    @foreach (var advertise in ViewBag.Advertises)
+                    {
+                        Html.RenderPartial("_ViewAdvertisePartial", (MizbanTV.Entities.Advertise)advertise);
+                    }
+            </div>
+        </div>
+    </div>
+</div>

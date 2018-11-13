@@ -274,6 +274,7 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\VideosController.cs" />
@@ -511,6 +512,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\fit.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
@@ -593,6 +595,8 @@
     <Content Include="Views\Admin\CreateAdvertise.cshtml" />
     <Content Include="Views\Shared\_ViewAdvertisePartial.cshtml" />
     <Content Include="Views\Admin\EditAdvertise.cshtml" />
+    <Content Include="Views\Shared\_ViewMenuPartial.cshtml" />
+    <Content Include="Views\Categories\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Temp\" />

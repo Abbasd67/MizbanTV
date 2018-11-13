@@ -1,0 +1,13 @@
+﻿@model List<MizbanTV.Entities.Category>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        دسته بندی ها
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        @foreach (var category in Model)
+        {
+            <a class="dropdown-item" href=@("/Categories/View/"+category.ID)>@category.Name</a>
+        }
+    </div>
+</li>

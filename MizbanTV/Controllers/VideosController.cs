@@ -44,7 +44,7 @@ namespace MizbanTV.Controllers
             }
             var advertises = new List<Advertise>();
 
-            foreach (var advertise in DbContext.Advertises.Where(a => a.AdvertiseType == AdvertiseType.Horizontal)
+            foreach (var advertise in DbContext.Advertises.Where(a => a.AdvertiseType == AdvertiseType.Vertical)
                 .OrderBy(a => Guid.NewGuid()).Take(3).ToList())
             {
                 advertises.Add(new Advertise
