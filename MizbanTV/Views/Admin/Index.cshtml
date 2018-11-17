@@ -58,6 +58,7 @@
                     columns.Bound(p => p.Description);
                     columns.Bound(p => p.CategoryName);
                     columns.Bound(p => p.FileName);
+                    columns.Bound(p => p.IsActivated);
                     columns.Command(command =>
                     {
                         command.Custom("View").Click("viewVideo");

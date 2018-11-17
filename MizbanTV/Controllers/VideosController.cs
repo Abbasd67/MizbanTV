@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using MizbanTV.Entities;
+using System.Net;
+using CaptchaMvc.HtmlHelpers;
 
 namespace MizbanTV.Controllers
 {
@@ -28,12 +30,13 @@ namespace MizbanTV.Controllers
         {
             if (id == null)
                 return RedirectToAction("Index", "Home");
-            var video = DbContext.Videos.Include(c=>c.Category).FirstOrDefault(v => v.ID == id);
+            var video = DbContext.Videos.Include(c => c.Category).FirstOrDefault(v => v.ID == id);
             if (video == null)
                 return RedirectToAction("Index", "Home");
             video.Hits++;
-            DbContext.Entry(video).State = System.Data.Entity.EntityState.Modified;
+            DbContext.Entry(video).State = EntityState.Modified;
             DbContext.SaveChanges();
+            var comments = DbContext.Comments.Where(c => c.VideoID == video.ID && c.IsApproved).ToList();
             var relatedVideos = DbContext.Videos.Where(v => v.ID != video.ID && v.CategoryID == video.CategoryID)
                 .OrderBy(v => Guid.NewGuid()).Take(6).ToList();
             var thumbModel = new List<ThumbnailViewModel>();
@@ -55,7 +58,7 @@ namespace MizbanTV.Controllers
                     Title = advertise.Title
                 });
             }
-            if(advertises.Count<3)
+            if (advertises.Count < 3)
             {
 
                 advertises.Add(new Advertise
@@ -76,9 +79,37 @@ namespace MizbanTV.Controllers
                 ThumbName = Path.Combine(Helper.LocalThumbPath, video.ThumbName),
                 CreationDate = Helper.ConvertMiladiToShamsi(video.CreateDate).ToLongDateString(),
                 ThumbNails = thumbModel,
-                Advertises = advertises
+                Advertises = advertises,
+                Comments = comments,
             };
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ViewVideo(ViewVideoViewModels model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return Json("Not valid model");
+            }
+            if (!this.IsCaptchaValid("Validate your captcha"))
+            {
+                return Json("Validate your captcha");
+            }
+            var comment = new Comment
+            {
+                DateTime = DateTime.Now,
+                Email = model.CommentEmail,
+                Name = model.CommentName,
+                Text = model.CommentText,
+                ID = Guid.NewGuid(),
+                IsApproved = true,
+                VideoID = model.ID
+            };
+            DbContext.Comments.Add(comment);
+            DbContext.SaveChanges();
+            return Json("OK");
         }
 
     }

@@ -33,8 +33,22 @@ namespace MizbanTV.Models
         public string CreationDate { get; set; }
 
         public IEnumerable<ThumbnailViewModel> ThumbNails { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
 
         public List<Advertise> Advertises { get; set; }
+
+        [Required]
+        [Display(Name = "نام")]
+        public string CommentName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "ایمیل")]
+        public string CommentEmail { get; set; }
+
+        [Required]
+        [Display(Name = "نظر شما...")]
+        public string CommentText { get; set; }
     }
 
     public class ThumbnailViewModel

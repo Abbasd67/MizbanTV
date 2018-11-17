@@ -38,10 +38,16 @@ namespace MizbanTV.Models
                 .WithRequired(e => e.Category)
                 .HasForeignKey(e => e.CategoryID)
                 .WillCascadeOnDelete();
+            modelBuilder.Entity<Video>()
+                .HasMany(e => e.Comments)
+                .WithRequired(e => e.Video)
+                .HasForeignKey(e => e.VideoID)
+                .WillCascadeOnDelete();
         }
 
         public virtual DbSet<Video> Videos { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Advertise> Advertises { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
     }
 }

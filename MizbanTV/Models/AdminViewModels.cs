@@ -24,6 +24,9 @@ namespace MizbanTV.Models
 
         [Display(Name = "دسته بندی")]
         public string CategoryName { get; set; }
+
+        [Display(Name = "فعال سازی")]
+        public bool IsActivated { get; set; }
     }
 
     public class AdminCreateVideoViewModel
@@ -77,6 +80,9 @@ namespace MizbanTV.Models
 
         [Display(Name = "انتخاب پس زمینه")]
         public List<HttpPostedFileBase> Images { get; set; }
+
+        [Display(Name = "فعال سازی")]
+        public bool IsActivated { get; set; }
     }
 
     public class AdminCreateCategoryViewModel

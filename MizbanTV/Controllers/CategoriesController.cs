@@ -29,7 +29,7 @@ namespace MizbanTV.Controllers
             var category = DbContext.Categories.Where(c => c.ID == id).FirstOrDefault();
             if (category == null)
                 RedirectToAction("Index", "Home");
-            var videos = DbContext.Videos.Where(v => v.CategoryID == id).OrderBy(v => v.Hits).ToList();
+            var videos = DbContext.Videos.Where(v => v.CategoryID == id && v.IsActivated).OrderBy(v => v.Hits).ToList();
             var thumbs = new List<ThumbnailViewModel>();
             var rand = new Random();
             foreach(var video in videos)

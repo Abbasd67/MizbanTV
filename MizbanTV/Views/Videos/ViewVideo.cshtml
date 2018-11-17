@@ -1,5 +1,5 @@
 ﻿@model MizbanTV.Models.ViewVideoViewModels
-
+@using CaptchaMvc.HtmlHelpers
 @{
     ViewBag._Title = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -96,7 +96,113 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <h5>نظرات</h5>
+        <div class="col-md-12">
+            <div class="row">
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="form-control">
+                        <div class="row">
+                            <div class="col-md-6" style="text-align:right;">@comment.Name</div>
+                            <div class="col-md-6" style="text-align:left;">@comment.DateTimeString</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">@comment.Text</div>
+                        </div>
+                    </div>
+                    <hr>
+                }
+            </div>
+        </div>
+
+        <div id="commentBox" class="form-group">
+            <h5>ارسال نظر</h5>
+
+            <br />
+            @using (Html.BeginForm("ViewVideo", "Videos", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmContact", name = "frmContact" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID);
+                @Html.HiddenFor(model => model.Title);
+                @Html.HiddenFor(model => model.Description);
+                @Html.HiddenFor(model => model.FileName);
+                @Html.HiddenFor(model => model.CategoryName);
+
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+
+                    <div class="col-sm-6 col-xs-12">
+                        @Html.TextBoxFor(model => model.CommentName, new { @placeholder = "نام", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CommentName)
+                    </div>
+
+                    <div class="col-sm-6 col-xs-12 margin-t-xs">
+                        @Html.TextBoxFor(model => model.CommentEmail, new { @placeholder = "ایمیل", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CommentEmail)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 ">
+                        @Html.TextAreaFor(model => model.CommentText, new { @placeholder = "نظر شما...", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CommentText)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.MathCaptcha()
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-default" value="ارسال نظر" />
+                </div>
+            }
+
+
+        </div>
+
+    </div>
 </div>
 @section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
     <script>const player = new Plyr('#player');</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#loading").hide();
+            $('#btnSubmit').click(function () {
+
+                if ($("#frmContact").valid()) {
+                    $('#frmContact').submit();
+                }
+                else {
+                    return false;
+                }
+            });
+            $("#frmContact").on("submit", function (event) {
+                event.preventDefault();
+                $("#loading").show();
+                $('#btnSubmit').attr('disabled', 'disabled');
+                var url = $(this).attr("action");
+                var formData = $(this).serialize();
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formData,
+                    dataType: "json",
+                    success: function (response) {
+                        if (response == "OK") {
+                            alert('نظر ثبت شد. توجه داشته باشید نظر شما پس از تایید مدیر سایت نمایش داده خواهد شد.');
+                        } else {
+                            alert('Error!!\n' + response);
+                        }
+                    },
+                    error: function (response) {
+                        alert('Error!!\n' + response.responseText);
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                        $('#btnSubmit').removeAttr('disabled');
+                    }
+                })
+            });
+        });
+    </script>
 }

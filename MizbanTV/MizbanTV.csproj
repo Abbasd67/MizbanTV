@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
+      <HintPath>..\packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
@@ -285,6 +288,7 @@
     <Compile Include="DependencyResolution\StructureMapScopeModule.cs" />
     <Compile Include="Entities\Advertise.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Video.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -332,6 +336,10 @@
     <Compile Include="Migrations\201810121020087_AdvertiseAdded.cs" />
     <Compile Include="Migrations\201810121020087_AdvertiseAdded.Designer.cs">
       <DependentUpon>201810121020087_AdvertiseAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811162051368_CommentsAdded.cs" />
+    <Compile Include="Migrations\201811162051368_CommentsAdded.Designer.cs">
+      <DependentUpon>201811162051368_CommentsAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -650,6 +658,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810121020087_AdvertiseAdded.resx">
       <DependentUpon>201810121020087_AdvertiseAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811162051368_CommentsAdded.resx">
+      <DependentUpon>201811162051368_CommentsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

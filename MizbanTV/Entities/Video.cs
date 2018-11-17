@@ -39,7 +39,13 @@ namespace MizbanTV.Entities
 
         public int Hits { get; set; }
 
+        [Display(Name = "فعال سازی")]
+        public bool IsActivated { get; set; } = false;
+
         [NotMapped]
-        public string FileSizeString { get => Helper.ConvertFileSizeToString(Size);  }
+        public string FileSizeString { get => Helper.ConvertFileSizeToString(Size); }
+
+        public List<Comment> Comments { get; set; }
     }
+
 }

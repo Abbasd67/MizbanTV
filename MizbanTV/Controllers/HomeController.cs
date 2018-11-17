@@ -22,7 +22,7 @@ namespace MizbanTV.Controllers
         public ActionResult Index()
         {
             var model = new HomeIndexViewModel();
-            var videos = DbContext.Videos.Include(v => v.Category).ToList();
+            var videos = DbContext.Videos.Where(v=>v.IsActivated).Include(v => v.Category).ToList();
             model.NewVideos = new List<ThumbnailViewModel>();
             var random = new Random();
             foreach (var video in videos.OrderByDescending(v => v.CreateDate).Take(6))

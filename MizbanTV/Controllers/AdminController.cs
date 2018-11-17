@@ -80,6 +80,7 @@ namespace MizbanTV.Controllers
                     Description = video.Description,
                     CategoryName = video.Category.Name,
                     FileName = video.FileName,
+                    IsActivated = video.IsActivated,
                     Size = video.FileSizeString
                 });
             }
@@ -239,7 +240,7 @@ namespace MizbanTV.Controllers
             }
             return View(model);
         }
-
+        [Authorize]
         public ActionResult CreateVideo()
         {
             var model = new AdminCreateVideoViewModel();
@@ -247,6 +248,7 @@ namespace MizbanTV.Controllers
             ViewBag.Categories = DbContext.Categories.OrderBy(c => c.Order).ToList();
             return View(model);
         }
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateVideo(AdminCreateVideoViewModel model)
@@ -265,6 +267,8 @@ namespace MizbanTV.Controllers
                     FileName = model.FileName
                 };
                 video = Helper.SaveVideo(video, model.FileName, model.Images);
+                if (User.IsInRole("Administrator"))
+                    video.IsActivated = true;
                 DbContext.Videos.Add(video);
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");
@@ -302,6 +306,7 @@ namespace MizbanTV.Controllers
                 Title = video.Title,
                 Description = video.Description,
                 FileName = video.FileName,
+                IsActivated = video.IsActivated,
                 CategoryID = video.CategoryID,
                 Extension = Path.GetExtension(video.FileName),
                 IsNewFileUploaded = false,
@@ -331,6 +336,7 @@ namespace MizbanTV.Controllers
                 video.Title = model.Title;
                 video.Description = model.Description;
                 video.CategoryID = model.CategoryID;
+                video.IsActivated = model.IsActivated;
                 DbContext.Entry(video).State = EntityState.Modified;
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");
