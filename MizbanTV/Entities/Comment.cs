@@ -17,16 +17,20 @@ namespace MizbanTV.Entities
         public Guid VideoID { get; set; }
 
         [Required]
+        [Display(Name = "نام")]
         public string Name { get; set; }
 
         [Required]
         [EmailAddress]
+        [Display(Name = "ایمیل")]
         public string Email { get; set; }
 
         [Required]
         [Column(TypeName = "ntext")]
+        [Display(Name = "کامنت")]
         public string Text { get; set; }
 
+        [Display(Name = "تایید شده")]
         public bool IsApproved { get; set; } = false;
 
         public DateTime DateTime { get; set; } = DateTime.Now;

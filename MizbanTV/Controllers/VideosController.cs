@@ -104,7 +104,7 @@ namespace MizbanTV.Controllers
                 Name = model.CommentName,
                 Text = model.CommentText,
                 ID = Guid.NewGuid(),
-                IsApproved = true,
+                IsApproved = false,
                 VideoID = model.ID
             };
             DbContext.Comments.Add(comment);

@@ -13,7 +13,7 @@ namespace MizbanTV.Entities
         [Key]
         public Guid ID { get; set; }
 
-        [Display(Name = "عنوان")]
+        [Display(Name = "عنوان ویدیو")]
         public string Title { get; set; }
 
         [Display(Name = "توضیحات")]

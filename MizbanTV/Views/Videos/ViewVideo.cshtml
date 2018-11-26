@@ -104,11 +104,22 @@
                 {
                     <div class="form-control">
                         <div class="row">
-                            <div class="col-md-6" style="text-align:right;">@comment.Name</div>
-                            <div class="col-md-6" style="text-align:left;">@comment.DateTimeString</div>
+                            <div class="col-md-6" style="text-align:right;">
+                                @Html.LabelFor(model => comment.Name, new { @class = "control-label" })
+                                :
+                                @comment.Name
+                            </div>
+                            <div class="col-md-6" style="text-align:left;">
+                                @comment.DateTimeString
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">@comment.Text</div>
+                        <div style="text-align:right;">
+                            <div class="row">
+                                <div class="col-md-12">@Html.LabelFor(model => comment.Text, new { @class = "control-label" })</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">@comment.Text</div>
+                            </div>
                         </div>
                     </div>
                     <hr>

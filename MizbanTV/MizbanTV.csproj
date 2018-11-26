@@ -605,6 +605,7 @@
     <Content Include="Views\Admin\EditAdvertise.cshtml" />
     <Content Include="Views\Shared\_ViewMenuPartial.cshtml" />
     <Content Include="Views\Categories\View.cshtml" />
+    <Content Include="Views\Admin\EditComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Temp\" />

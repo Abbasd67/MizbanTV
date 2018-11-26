@@ -41,7 +41,7 @@ namespace MizbanTV.Controllers
                     });
             return Content(list, "application/json");
         }
-        
+
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CategoryDestroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<Category> products)
@@ -151,6 +151,37 @@ namespace MizbanTV.Controllers
                             System.IO.File.Delete(path);
                         }
                         DbContext.Advertises.Remove(advertise);
+                        DbContext.SaveChanges();
+                    }
+                }
+            }
+
+            return Json(products.ToDataSourceResult(request, ModelState));
+        }
+
+        public ActionResult CommentsRead([DataSourceRequest] DataSourceRequest request)
+        {
+            var data = DbContext.Comments.Include(c => c.Video).OrderBy(c => c.DateTime).ToList();
+            var list = JsonConvert.SerializeObject(data.ToDataSourceResult(request), Formatting.None,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+            return Content(list, "application/json");
+        }
+
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CommentsDestroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<Comment> products)
+        {
+            if (products.Any())
+            {
+                foreach (var product in products)
+                {
+                    var comment = DbContext.Comments.FirstOrDefault(v => v.ID == product.ID);
+                    if (comment != null)
+                    {
+                        DbContext.Comments.Remove(comment);
                         DbContext.SaveChanges();
                     }
                 }
@@ -436,6 +467,39 @@ namespace MizbanTV.Controllers
         }
 
 
+        public ActionResult EditComment(Guid id)
+        {
+            var comment = DbContext.Comments.Include(c => c.Video).FirstOrDefault(v => v.ID == id);
+            if (comment == null)
+                RedirectToAction("index");
+            return View(comment);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditComment(Comment model)
+        {
+            if (ModelState.IsValid)
+            {
+                var comment = DbContext.Comments.FirstOrDefault(v => v.ID == model.ID);
+                if (comment == null)
+                {
+                    ModelState.AddModelError("", "Category Not Found");
+                    return View(model);
+                }
+                comment.Name = model.Name;
+                comment.Email = model.Email;
+                comment.Text = model.Text;
+                comment.IsApproved = model.IsApproved;
+                DbContext.Entry(comment).State = EntityState.Modified;
+                DbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+
     }
     public static class Extensions
     {
@@ -451,11 +515,11 @@ namespace MizbanTV.Controllers
         public static dynamic GetAdvertiseTypes()
         {
             return from AdvertiseType e in Enum.GetValues(typeof(AdvertiseType))
-            select new
-            {
-                ID = (int)e,
-                Name = GetDisplayName(e)
-            };
+                   select new
+                   {
+                       ID = (int)e,
+                       Name = GetDisplayName(e)
+                   };
         }
     }
 
