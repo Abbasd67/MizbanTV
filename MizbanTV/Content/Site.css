@@ -4,7 +4,7 @@
 }
 
 body {
-    font-family:'IRYekan', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'IRMitra', Tahoma, Geneva, Verdana, sans-serif;
     padding-bottom: 20px;
 }
 
@@ -54,7 +54,7 @@ div#all {
 .parallax h2{
     background-color:rgb(132, 132, 132);
     padding:7px;
-    font-family:IRTitr;
+    /*font-family:IRTitr;*/
 }
 .parallax h2 a{
     color:#ff4b4b;

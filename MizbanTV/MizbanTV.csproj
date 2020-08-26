@@ -341,6 +341,10 @@
     <Compile Include="Migrations\201811162051368_CommentsAdded.Designer.cs">
       <DependentUpon>201811162051368_CommentsAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812171144147_AdvertiseForCategoryAndVideoAdded.cs" />
+    <Compile Include="Migrations\201812171144147_AdvertiseForCategoryAndVideoAdded.Designer.cs">
+      <DependentUpon>201812171144147_AdvertiseForCategoryAndVideoAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
@@ -381,8 +385,17 @@
     <Content Include="Content\fonts\Yekan.svg" />
     <Content Include="Content\Images\Advertising-V.png" />
     <Content Include="Content\Images\Advertising-H.gif" />
+    <Content Include="Content\Images\eitaa.png" />
+    <Content Include="Content\Images\googleplus.png" />
+    <Content Include="Content\Images\iGap.png" />
+    <Content Include="Content\Images\instagram.png" />
+    <Content Include="Content\Images\Mizban Tv - Logo.png" />
+    <Content Include="Content\Images\Mizban Tv - Text.png" />
     <Content Include="Content\Images\mizban TV-logo-3.jpg" />
     <Content Include="Content\Images\Pattern.png" />
+    <Content Include="Content\Images\Soroush.png" />
+    <Content Include="Content\Images\telegram.png" />
+    <Content Include="Content\Images\twitter.png" />
     <Content Include="Content\irfonts.css" />
     <Content Include="Content\plyr.css" />
     <Content Include="Content\Thumb\Piper.2016.BDRip.Ganool.IranFilm.jpg" />
@@ -662,6 +675,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811162051368_CommentsAdded.resx">
       <DependentUpon>201811162051368_CommentsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812171144147_AdvertiseForCategoryAndVideoAdded.resx">
+      <DependentUpon>201812171144147_AdvertiseForCategoryAndVideoAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

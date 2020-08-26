@@ -32,10 +32,21 @@ namespace MizbanTV.Models
         [Display(Name = "تاریخ ایجاد")]
         public string CreationDate { get; set; }
 
+        [Display(Name = "تعداد دفعات نمایش")]
+        public int Hits { get; set; }
+
         public IEnumerable<ThumbnailViewModel> ThumbNails { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
 
         public List<Advertise> Advertises { get; set; }
+
+        [Display(Name = "فایل تبلیغ")]
+        public string AdvertiseFileName { get; set; }
+
+        [Display(Name = "لینک تبلیغ")]
+        public string AdvertiseLink { get; set; }
+
+
 
         [Required]
         [Display(Name = "نام")]

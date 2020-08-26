@@ -23,5 +23,11 @@ namespace MizbanTV.Entities
         public string BackgroundImage { get; set; }
 
         public virtual List<Video> Videos { get; set; }
+
+        [Display(Name = "فایل تبلیغ")]
+        public string AdvertiseFileName { get; set; } = "Advertising-H.gif";
+
+        [Display(Name = "لینک تبلیغ")]
+        public string AdvertiseLink { get; set; } = "/Home/Contact";
     }
 }

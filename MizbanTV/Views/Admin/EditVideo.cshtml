@@ -85,6 +85,25 @@
                 @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdvertiseFileName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdvertiseFileName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.Advertises, new { type = "file", name = "Files" })
+                @Html.ValidationMessageFor(model => model.AdvertiseFileName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdvertiseLink, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdvertiseLink, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AdvertiseLink, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="دخیره" class="btn btn-default" />

@@ -20,5 +20,11 @@ namespace MizbanTV.Models
         public string BackgroundImage { get; set; }
 
         public bool IsHotVideos { get; set; }
+
+        [Display(Name = "فایل تبلیغ")]
+        public string AdvertiseFileName { get; set; }
+
+        [Display(Name = "لینک تبلیغ")]
+        public string AdvertiseLink { get; set; }
     }
 }

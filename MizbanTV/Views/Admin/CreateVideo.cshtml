@@ -49,17 +49,17 @@
             @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @(Html.Kendo().Upload()
-                            .Name("videos")
-                            .Multiple(false)
-                            .Async(a => a
-                                .Save("SaveVideo", "Admin")
-                                .AutoUpload(true)
-                            )
-                            .Events(e => e
-                                .Upload("onUpload")
-                                .Success("onSuccess")
-                            )
-                            .Validation(validation => validation.AllowedExtensions(new string[] { ".mp4" }))
+                                    .Name("videos")
+                                    .Multiple(false)
+                                    .Async(a => a
+                                        .Save("SaveVideo", "Admin")
+                                        .AutoUpload(true)
+                                    )
+                                    .Events(e => e
+                                        .Upload("onUpload")
+                                        .Success("onSuccess")
+                                    )
+                                    .Validation(validation => validation.AllowedExtensions(new string[] { ".mp4" }))
                 )
                 @Html.ValidationMessageFor(x => x.FileName, "", new { @class = "text-danger" })
             </div>
@@ -72,6 +72,24 @@
                 @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
             </div>
         </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Advertises, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Advertises, new { type = "file", name = "Files" })
+                @Html.ValidationMessageFor(model => model.Advertises, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdvertiseLink, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdvertiseLink, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AdvertiseLink, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="دخیره" class="btn btn-default" />

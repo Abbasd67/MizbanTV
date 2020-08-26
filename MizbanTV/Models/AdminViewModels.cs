@@ -50,6 +50,12 @@ namespace MizbanTV.Models
 
         [Display(Name = "انتخاب پس زمینه")]
         public List<HttpPostedFileBase> Images { get; set; }
+
+        [Display(Name = "فایل تبلیغ")]
+        public List<HttpPostedFileBase> Advertises { get; set; }
+
+        [Display(Name = "لینک تبلیغ")]
+        public string AdvertiseLink { get; set; }
     }
 
     public class AdminEditVideoViewModel
@@ -83,6 +89,15 @@ namespace MizbanTV.Models
 
         [Display(Name = "فعال سازی")]
         public bool IsActivated { get; set; }
+
+        [Display(Name = "فایل تبلیغ")]
+        public string AdvertiseFileName { get; set; }
+
+        [Display(Name = "فایل تبلیغ")]
+        public List<HttpPostedFileBase> Advertises { get; set; }
+
+        [Display(Name = "لینک تبلیغ")]
+        public string AdvertiseLink { get; set; }
     }
 
     public class AdminCreateCategoryViewModel
@@ -91,8 +106,10 @@ namespace MizbanTV.Models
         {
             Images = new List<HttpPostedFileBase>();
             Category = new Category();
+            Advertises = new List<HttpPostedFileBase>();
         }
         public List<HttpPostedFileBase> Images { get; set; }
+        public List<HttpPostedFileBase> Advertises { get; set; }
         public Category Category { get; set; }
     }
 

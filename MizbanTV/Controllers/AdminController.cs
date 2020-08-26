@@ -221,6 +221,16 @@ namespace MizbanTV.Controllers
                 {
                     category.BackgroundImage = "blank.png";
                 }
+                if(model.Advertises.Count > 0 && model.Advertises[0] != null)
+                {
+                    var advertise = model.Advertises[0];
+                    var fileExtension = Path.GetExtension(advertise.FileName);
+                    var advertiseName = category.ID.ToString() + fileExtension;
+                    var physicalPath = Path.Combine(Helper.GetAdvertisePath(), advertiseName);
+                    advertise.SaveAs(physicalPath);
+                    category.AdvertiseFileName = advertiseName;
+                }
+                category.AdvertiseLink = model.Category.AdvertiseLink;
                 DbContext.Categories.Add(category);
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");
@@ -265,6 +275,16 @@ namespace MizbanTV.Controllers
                     image.SaveAs(physicalPath);
                     category.BackgroundImage = fileName;
                 }
+                if (model.Advertises.Count > 0 && model.Advertises[0] != null)
+                {
+                    var advertise = model.Advertises[0];
+                    var fileExtension = Path.GetExtension(advertise.FileName);
+                    var advertiseName = category.ID.ToString() + fileExtension;
+                    var physicalPath = Path.Combine(Helper.GetAdvertisePath(), advertiseName);
+                    advertise.SaveAs(physicalPath);
+                    category.AdvertiseFileName = advertiseName;
+                }
+                category.AdvertiseLink = model.Category.AdvertiseLink;
                 DbContext.Entry(category).State = EntityState.Modified;
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");
@@ -300,6 +320,16 @@ namespace MizbanTV.Controllers
                 video = Helper.SaveVideo(video, model.FileName, model.Images);
                 if (User.IsInRole("Administrator"))
                     video.IsActivated = true;
+                if (model.Advertises.Count > 0 && model.Advertises[0] != null)
+                {
+                    var advertise = model.Advertises[0];
+                    var fileExtension = Path.GetExtension(advertise.FileName);
+                    var advertiseName = video.ID.ToString() + fileExtension;
+                    var physicalPath = Path.Combine(Helper.GetAdvertisePath(), advertiseName);
+                    advertise.SaveAs(physicalPath);
+                    video.AdvertiseFileName = advertiseName;
+                }
+                video.AdvertiseLink = model.AdvertiseLink;
                 DbContext.Videos.Add(video);
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");
@@ -342,6 +372,8 @@ namespace MizbanTV.Controllers
                 Extension = Path.GetExtension(video.FileName),
                 IsNewFileUploaded = false,
                 Size = video.Size,
+                AdvertiseFileName = video.AdvertiseFileName,
+                AdvertiseLink = video.AdvertiseLink
             };
             ViewBag.Categories = DbContext.Categories.OrderBy(c => c.Order).ToList();
             return View(model);
@@ -363,11 +395,27 @@ namespace MizbanTV.Controllers
                 {
                     video = Helper.SaveVideo(video, model.FileName, model.Images);
                 }
+                if (model.Images.Count > 0 && model.Images[0] != null)
+                {
+                    var image = model.Images[0];
+                    var physicalPath = Path.Combine(Helper.GetThumbPath(), video.ThumbName);
+                    image.SaveAs(physicalPath);
+                }
+                if (model.Advertises.Count > 0 && model.Advertises[0] != null)
+                {
+                    var advertise = model.Advertises[0];
+                    var fileExtension = Path.GetExtension(advertise.FileName);
+                    var advertiseName = video.ID.ToString() + fileExtension;
+                    var physicalPath = Path.Combine(Helper.GetAdvertisePath(), advertiseName);
+                    advertise.SaveAs(physicalPath);
+                    video.AdvertiseFileName = advertiseName;
+                }
                 video.LastModifiedDate = DateTime.Now;
                 video.Title = model.Title;
                 video.Description = model.Description;
                 video.CategoryID = model.CategoryID;
                 video.IsActivated = model.IsActivated;
+                video.AdvertiseLink = model.AdvertiseLink;
                 DbContext.Entry(video).State = EntityState.Modified;
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");

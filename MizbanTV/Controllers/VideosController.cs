@@ -52,7 +52,7 @@ namespace MizbanTV.Controllers
             {
                 advertises.Add(new Advertise
                 {
-                    AdvertiseType = AdvertiseType.Horizontal,
+                    AdvertiseType = AdvertiseType.Vertical,
                     FileName = Path.Combine(Helper.LocalAdvertiesePath, advertise.FileName),
                     Link = advertise.Link,
                     Title = advertise.Title
@@ -81,6 +81,9 @@ namespace MizbanTV.Controllers
                 ThumbNails = thumbModel,
                 Advertises = advertises,
                 Comments = comments,
+                Hits = video.Hits,
+                AdvertiseFileName = Path.Combine(Helper.LocalAdvertiesePath, video.AdvertiseFileName),
+                AdvertiseLink = video.AdvertiseLink
             };
             return View(model);
         }

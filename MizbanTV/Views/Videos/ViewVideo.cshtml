@@ -8,10 +8,12 @@
 
 <div style="text-align:center;">
     <div class="col-md-12">
-        <h2>MIZBAN TV</h2>
+        <img src="~/Content/Images/Mizban Tv - Text.png" height="50" />
     </div>
     <div class="col-md-12">
-        <img src="~/Content/Images/Advertising-H.gif" />
+        <div style="text-align:center;padding:10px;">
+            <a style="width:100%; height:100%; display:inline-block; overflow:hidden" href="@Model.AdvertiseLink"><img src="@Url.Content(Model.AdvertiseFileName)" height="100" /></a>
+        </div>
     </div>
     <div class="col-md-12">
         <div class="row">
@@ -67,6 +69,12 @@
                                             @Html.LabelFor(model => model.CreationDate, new { @class = "col-md-5 control-label" })
                                             <div class="col-md-7">
                                                 @Html.DisplayFor(model => model.CreationDate)
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            @Html.LabelFor(model => model.Hits, new { @class = "col-md-5 control-label" })
+                                            <div class="col-md-7">
+                                                @Html.DisplayFor(model => model.Hits)
                                             </div>
                                         </div>
                                     </p>

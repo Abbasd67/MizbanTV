@@ -53,7 +53,9 @@ namespace MizbanTV.Controllers
                     Videos = videoList,
                     IdNumber = ++i,
                     BackgroundImage = Path.Combine(Helper.LocalCategoriesPath, category.BackgroundImage),
-                    IsHotVideos = false
+                    IsHotVideos = false,
+                    AdvertiseFileName = Path.Combine(Helper.LocalAdvertiesePath, category.AdvertiseFileName),
+                    AdvertiseLink = category.AdvertiseLink
                 });
             }
             model.Advertises = new List<Advertise>();
